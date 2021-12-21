@@ -1,0 +1,6 @@
+
+SCRIPT
+
+FILE_NAME data/TXT/stage001.txt
+
+END_SCRIPT

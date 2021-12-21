@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="00_main\main.cpp">
+      <Filter>00_main</Filter>
+    </ClCompile>
+    <ClCompile Include="01_comon\fade.cpp">
+      <Filter>01_comon</Filter>
+    </ClCompile>
+    <ClCompile Include="01_comon\manager.cpp">
+      <Filter>01_comon</Filter>
+    </ClCompile>
+    <ClCompile Include="01_comon\polygon.cpp">
+      <Filter>01_comon</Filter>
+    </ClCompile>
+    <ClCompile Include="01_comon\renderer.cpp">
+      <Filter>01_comon</Filter>
+    </ClCompile>
+    <ClCompile Include="01_comon\sound.cpp">
+      <Filter>01_comon</Filter>
+    </ClCompile>
+    <ClCompile Include="01_comon\tcp_client.cpp">
+      <Filter>01_comon</Filter>
+    </ClCompile>
+    <ClCompile Include="02_input\input.cpp">
+      <Filter>02_input</Filter>
+    </ClCompile>
+    <ClCompile Include="02_input\inputcontroller.cpp">
+      <Filter>02_input</Filter>
+    </ClCompile>
+    <ClCompile Include="02_input\inputkeyboard.cpp">
+      <Filter>02_input</Filter>
+    </ClCompile>
+    <ClCompile Include="03_scene\scene.cpp">
+      <Filter>03_scene</Filter>
+    </ClCompile>
+    <ClCompile Include="03_scene\scene2d.cpp">
+      <Filter>03_scene</Filter>
+    </ClCompile>
+    <ClCompile Include="04_mode\game.cpp">
+      <Filter>04_mode</Filter>
+    </ClCompile>
+    <ClCompile Include="04_mode\ranking.cpp">
+      <Filter>04_mode</Filter>
+    </ClCompile>
+    <ClCompile Include="04_mode\result.cpp">
+      <Filter>04_mode</Filter>
+    </ClCompile>
+    <ClCompile Include="04_mode\title.cpp">
+      <Filter>04_mode</Filter>
+    </ClCompile>
+    <ClCompile Include="04_mode\tutorial.cpp">
+      <Filter>04_mode</Filter>
+    </ClCompile>
+    <ClCompile Include="05_game\bg.cpp">
+      <Filter>05_game</Filter>
+    </ClCompile>
+    <ClCompile Include="05_game\bullet.cpp">
+      <Filter>05_game</Filter>
+    </ClCompile>
+    <ClCompile Include="05_game\explosion.cpp">
+      <Filter>05_game</Filter>
+    </ClCompile>
+    <ClCompile Include="05_game\item.cpp">
+      <Filter>05_game</Filter>
+    </ClCompile>
+    <ClCompile Include="05_game\stage.cpp">
+      <Filter>05_game</Filter>
+    </ClCompile>
+    <ClCompile Include="05_game\terrain.cpp">
+      <Filter>05_game</Filter>
+    </ClCompile>
+    <ClCompile Include="06_player\player.cpp">
+      <Filter>06_player</Filter>
+    </ClCompile>
+    <ClCompile Include="07_powerup\option.cpp">
+      <Filter>07_powerup</Filter>
+    </ClCompile>
+    <ClCompile Include="07_powerup\shield.cpp">
+      <Filter>07_powerup</Filter>
+    </ClCompile>
+    <ClCompile Include="07_powerup\laser.cpp">
+      <Filter>07_powerup</Filter>
+    </ClCompile>
+    <ClCompile Include="07_powerup\missile.cpp">
+      <Filter>07_powerup</Filter>
+    </ClCompile>
+    <ClCompile Include="08_enemy\boss.cpp">
+      <Filter>08_enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="08_enemy\enemy.cpp">
+      <Filter>08_enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="08_enemy\enemy_type1.cpp">
+      <Filter>08_enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="08_enemy\enemy_type2.cpp">
+      <Filter>08_enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="08_enemy\enemy_type3.cpp">
+      <Filter>08_enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="09_effect\particle_effect.cpp">
+      <Filter>09_effect</Filter>
+    </ClCompile>
+    <ClCompile Include="09_effect\star.cpp">
+      <Filter>09_effect</Filter>
+    </ClCompile>
+    <ClCompile Include="09_effect\triangle.cpp">
+      <Filter>09_effect</Filter>
+    </ClCompile>
+    <ClCompile Include="09_effect\triangle_effect.cpp">
+      <Filter>09_effect</Filter>
+    </ClCompile>
+    <ClCompile Include="10_UI\energy_ui.cpp">
+      <Filter>10_UI</Filter>
+    </ClCompile>
+    <ClCompile Include="10_UI\life.cpp">
+      <Filter>10_UI</Filter>
+    </ClCompile>
+    <ClCompile Include="10_UI\number.cpp">
+      <Filter>10_UI</Filter>
+    </ClCompile>
+    <ClCompile Include="10_UI\pause.cpp">
+      <Filter>10_UI</Filter>
+    </ClCompile>
+    <ClCompile Include="10_UI\powerui.cpp">
+      <Filter>10_UI</Filter>
+    </ClCompile>
+    <ClCompile Include="10_UI\ranking_ui.cpp">
+      <Filter>10_UI</Filter>
+    </ClCompile>
+    <ClCompile Include="10_UI\score.cpp">
+      <Filter>10_UI</Filter>
+    </ClCompile>
+    <ClCompile Include="texture_manager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="00_main\main.h">
+      <Filter>00_main</Filter>
+    </ClInclude>
+    <ClInclude Include="01_comon\fade.h">
+      <Filter>01_comon</Filter>
+    </ClInclude>
+    <ClInclude Include="01_comon\manager.h">
+      <Filter>01_comon</Filter>
+    </ClInclude>
+    <ClInclude Include="01_comon\polygon.h">
+      <Filter>01_comon</Filter>
+    </ClInclude>
+    <ClInclude Include="01_comon\renderer.h">
+      <Filter>01_comon</Filter>
+    </ClInclude>
+    <ClInclude Include="01_comon\sound.h">
+      <Filter>01_comon</Filter>
+    </ClInclude>
+    <ClInclude Include="01_comon\tcp_client.h">
+      <Filter>01_comon</Filter>
+    </ClInclude>
+    <ClInclude Include="02_input\input.h">
+      <Filter>02_input</Filter>
+    </ClInclude>
+    <ClInclude Include="02_input\inputcontroller.h">
+      <Filter>02_input</Filter>
+    </ClInclude>
+    <ClInclude Include="02_input\inputkeyboard.h">
+      <Filter>02_input</Filter>
+    </ClInclude>
+    <ClInclude Include="03_scene\scene.h">
+      <Filter>03_scene</Filter>
+    </ClInclude>
+    <ClInclude Include="03_scene\scene2d.h">
+      <Filter>03_scene</Filter>
+    </ClInclude>
+    <ClInclude Include="04_mode\game.h">
+      <Filter>04_mode</Filter>
+    </ClInclude>
+    <ClInclude Include="04_mode\ranking.h">
+      <Filter>04_mode</Filter>
+    </ClInclude>
+    <ClInclude Include="04_mode\result.h">
+      <Filter>04_mode</Filter>
+    </ClInclude>
+    <ClInclude Include="04_mode\title.h">
+      <Filter>04_mode</Filter>
+    </ClInclude>
+    <ClInclude Include="04_mode\tutorial.h">
+      <Filter>04_mode</Filter>
+    </ClInclude>
+    <ClInclude Include="05_game\bg.h">
+      <Filter>05_game</Filter>
+    </ClInclude>
+    <ClInclude Include="05_game\bullet.h">
+      <Filter>05_game</Filter>
+    </ClInclude>
+    <ClInclude Include="05_game\explosion.h">
+      <Filter>05_game</Filter>
+    </ClInclude>
+    <ClInclude Include="05_game\Item.h">
+      <Filter>05_game</Filter>
+    </ClInclude>
+    <ClInclude Include="05_game\stage.h">
+      <Filter>05_game</Filter>
+    </ClInclude>
+    <ClInclude Include="05_game\terrain.h">
+      <Filter>05_game</Filter>
+    </ClInclude>
+    <ClInclude Include="06_player\player.h">
+      <Filter>06_player</Filter>
+    </ClInclude>
+    <ClInclude Include="07_powerup\missile.h">
+      <Filter>07_powerup</Filter>
+    </ClInclude>
+    <ClInclude Include="07_powerup\option.h">
+      <Filter>07_powerup</Filter>
+    </ClInclude>
+    <ClInclude Include="07_powerup\shield.h">
+      <Filter>07_powerup</Filter>
+    </ClInclude>
+    <ClInclude Include="07_powerup\laser.h">
+      <Filter>07_powerup</Filter>
+    </ClInclude>
+    <ClInclude Include="08_enemy\boss.h">
+      <Filter>08_enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="08_enemy\enemy.h">
+      <Filter>08_enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="08_enemy\enemy_type1.h">
+      <Filter>08_enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="08_enemy\enemy_type2.h">
+      <Filter>08_enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="08_enemy\enemy_type3.h">
+      <Filter>08_enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="09_effect\particle_effect.h">
+      <Filter>09_effect</Filter>
+    </ClInclude>
+    <ClInclude Include="09_effect\star.h">
+      <Filter>09_effect</Filter>
+    </ClInclude>
+    <ClInclude Include="09_effect\triangle.h">
+      <Filter>09_effect</Filter>
+    </ClInclude>
+    <ClInclude Include="09_effect\triangle_effect.h">
+      <Filter>09_effect</Filter>
+    </ClInclude>
+    <ClInclude Include="10_UI\energy_ui.h">
+      <Filter>10_UI</Filter>
+    </ClInclude>
+    <ClInclude Include="10_UI\life.h">
+      <Filter>10_UI</Filter>
+    </ClInclude>
+    <ClInclude Include="10_UI\number.h">
+      <Filter>10_UI</Filter>
+    </ClInclude>
+    <ClInclude Include="10_UI\pause.h">
+      <Filter>10_UI</Filter>
+    </ClInclude>
+    <ClInclude Include="10_UI\powerui.h">
+      <Filter>10_UI</Filter>
+    </ClInclude>
+    <ClInclude Include="10_UI\ranking_ui.h">
+      <Filter>10_UI</Filter>
+    </ClInclude>
+    <ClInclude Include="10_UI\score.h">
+      <Filter>10_UI</Filter>
+    </ClInclude>
+    <ClInclude Include="texture_manager.h" />
+    <ClInclude Include="resource.h">
+      <Filter>resource</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="00_main">
+      <UniqueIdentifier>{2407a761-74fa-4c2c-a353-0fd8e124344d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_comon">
+      <UniqueIdentifier>{21483193-7f29-4ce9-bc9c-42c878f8411e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04_mode">
+      <UniqueIdentifier>{2c0c168a-fa26-4861-8298-908270c1536e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05_game">
+      <UniqueIdentifier>{10a201c6-5e5a-401f-80b9-00979eefee2e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06_player">
+      <UniqueIdentifier>{769664ac-d4ac-44a5-8212-7edc09081005}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_input">
+      <UniqueIdentifier>{bb63f70f-215e-4a92-95d3-e726ae783359}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03_scene">
+      <UniqueIdentifier>{c7d49472-fcf1-4f22-8a70-7583e4d50e2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="08_enemy">
+      <UniqueIdentifier>{be5f0214-7e62-46f2-bbb6-47bf2531f6fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="09_effect">
+      <UniqueIdentifier>{b94cfef4-9aed-450c-ac19-ce3c098d96f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="10_UI">
+      <UniqueIdentifier>{c17b1ecc-4ded-44f5-bec3-62bb45720588}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="07_powerup">
+      <UniqueIdentifier>{2b000a0a-6831-44d8-96c7-6b7d6fde468d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resource">
+      <UniqueIdentifier>{34d9d1ca-9cf8-4b12-b9e2-be50467a015a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="icon1.ico">
+      <Filter>resource</Filter>
+    </Image>
+    <Image Include="icon2.ico">
+      <Filter>resource</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc">
+      <Filter>resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

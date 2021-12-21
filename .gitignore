@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+/01_プロジェクト/Debug
+.suo
+*.suo
+*.db

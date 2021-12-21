@@ -1,0 +1,250 @@
+//=========================================================
+//
+//		ステージ情報スクリプト [stage.txt]
+//		Author : KUDO AYANO
+//
+//=========================================================
+
+	◆スクリプトのコマンドについて◆
+
+	TYPE	オブジェクトの種類を指定します
+		・・・CScene::OBJTYPE_ENEMY			// 敵のオブジェクトを出現させます
+		・・・CScene::OBJTYPE_STAR			// 星のオブジェクトを出現させます
+		
+	FLIP ・・・・アイテム(ロウソク)の炎の位置を設定します0にすると画像の上、1にすると画像の下に描画します
+				 主に地形に置かれているアイテムに使用します
+				 
+	FORMAITION ・・・・編隊の数 : 敵や地形のオブジェクトをまとめて出現させます
+	
+//---------------------------------------------------------
+
+SCRIPT				//スクリプト開始　この行は消さないこと
+
+		OBJSET
+			FRAME 80
+			POS 1280 600 0
+			TYPE 9			
+			FORMAITION 7
+			ORBITSET
+				OBIT 300 600 0
+				OBIT 640 360 0
+				OBIT 5000 500 0
+			END_ORBITSET
+			
+	END_OBJSET
+	
+	OBJSET
+			FRAME 300
+			POS 1280 100 0
+			TYPE 9
+			FORMAITION 7
+			ORBITSET
+				OBIT 300 100 0
+				OBIT 640 360 0
+				OBIT 5000 360 0
+			END_ORBITSET
+			
+	END_OBJSET
+
+		//星
+		OBJSET
+			FRAME 80
+			POS 1280 200 0
+			TYPE 6					
+		END_OBJSET
+		
+		OBJSET
+			FRAME 220
+			POS 1280 600 0
+			TYPE 9
+			FORMAITION 7
+			ORBITSET
+				OBIT 300 600 0
+				OBIT 640 360 0
+				OBIT 5000 500 0
+			END_ORBITSET
+			
+	END_OBJSET
+	
+	OBJSET
+			FRAME 300
+			POS 1280 100 0
+			TYPE 9
+			FORMAITION 7
+			ORBITSET
+				OBIT 300 100 0
+				OBIT 640 360 0
+				OBIT 5000 360 0
+			END_ORBITSET
+			
+	END_OBJSET
+
+		//星
+		OBJSET
+			FRAME 80
+			POS 1280 500 0
+			TYPE 6					
+		END_OBJSET
+
+		OBJSET
+			FRAME 220
+			POS 1280 600 0
+			TYPE 9
+			FORMAITION 7
+			ORBITSET
+				OBIT 300 600 0
+				OBIT 640 360 0
+				OBIT 5000 500 0
+			END_ORBITSET
+			
+	END_OBJSET
+	
+	OBJSET
+			FRAME 300
+			POS 1280 100 0
+			TYPE 9
+			FORMAITION 7
+			ORBITSET
+				OBIT 300 100 0
+				OBIT 640 360 0
+				OBIT 5000 360 0
+	END_ORBITSET
+			
+			
+		//星
+		OBJSET
+			FRAME 80
+			POS 1280 450 0
+			TYPE 6					
+		END_OBJSET
+		
+	END_OBJSET
+	
+			OBJSET
+			FRAME 220
+			POS 1280 600 0
+			TYPE 9
+			FORMAITION 7
+			ORBITSET
+				OBIT 300 600 0
+				OBIT 640 360 0
+				OBIT 5000 500 0
+			END_ORBITSET
+			
+	END_OBJSET
+	
+	
+	// 地形
+	OBJSET
+			FRAME 200
+			POS 1280 50 0
+			TYPE 2
+			FORMAITION 60
+	END_OBJSET
+		
+	// 地形
+	OBJSET
+			FRAME 1
+			POS 1280 670 0
+			TYPE 2
+			FORMAITION 60
+			
+	END_OBJSET
+		
+	// アイテム
+	END_OBJSET
+			OBJSET
+			FRAME 80
+			POS 1280 130 0
+			FLIP 1
+			TYPE 5
+	END_OBJSET
+	
+	//地形に沿って敵を出す
+		OBJSET
+			FRAME 300
+			POS -300 600 0
+			TYPE 9
+			FORMAITION 3
+			ORBITSET
+				OBIT 1000 600 0
+				OBIT 500 600 0
+				OBIT -5000 600 0
+			END_ORBITSET
+			
+	END_OBJSET	
+	
+	// アイテム
+	OBJSET
+			FRAME 180
+			POS 1280 595 0
+			FLIP 0
+			TYPE 5
+	END_OBJSET
+	
+	// アイテム
+	OBJSET
+			FRAME 100
+			POS 1280 135 0
+			FLIP 1
+			TYPE 5
+	END_OBJSET
+	
+		OBJSET
+			FRAME 80
+			POS 1280 360 0
+			TYPE 9
+			FORMAITION 7
+			ORBITSET
+				OBIT 300 360 0
+				OBIT 640 360 0
+				OBIT 5000 500 0
+			END_ORBITSET
+			
+	END_OBJSET
+	
+	// アイテム
+	OBJSET
+			FRAME 100
+			POS 1280 595 0
+			FLIP 0
+			TYPE 5
+	END_OBJSET
+	
+
+	
+	OBJSET
+			FRAME 10
+			POS 1280 200 0
+			TYPE 9
+			FORMAITION 7
+			ORBITSET
+				OBIT 300 200 0
+				OBIT 640 360 0
+				OBIT 5000 360 0
+	END_ORBITSET
+	
+	
+		//地形に沿って敵を出す
+		OBJSET
+			FRAME 80
+			POS -300 600 0
+			TYPE 9
+			FORMAITION 3
+			ORBITSET
+				OBIT 1000 600 0
+				OBIT 500 600 0
+				OBIT -5000 600 0
+			END_ORBITSET
+			
+	END_OBJSET	
+
+	// ボスの出現
+	OBJSET
+			FRAME 300
+			POS 1280 360 0
+			TYPE 8
+			
+	END_OBJSET
+	
+END_SCRIPT		//　スクリプト終了　この行は消さないこと
