@@ -59,6 +59,14 @@ private:
 		POSPLAYER_RIGHT,	// 右
 	}POSPLAYER;
 
+    // プレイヤーの状態
+    typedef enum
+    {
+        STATE_NORMAL=0, // 通常
+        STATE_DAMAGE,   // ダメージ
+        STATE_DEATH     // 死亡
+    }STATE;
+
 	// メンバ関数
 	void Animation(void);
 
@@ -79,7 +87,7 @@ private:
 	bool m_bItem;												// アイテムをとったか
 	bool m_bMoveAI;												// プレイヤーAIが動いたかどうか
 
-
+    STATE m_state;// プレイヤーの状態
 	// 色関係 
 	D3DXCOLOR m_Colr;											// カラー
 	int m_nCounter;												// カウンター

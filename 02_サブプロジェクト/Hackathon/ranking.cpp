@@ -16,6 +16,7 @@ D3DXVECTOR3 g_posRank[MAX_RANKY][MAX_RANKX];				//スコアの位置
 Rank g_RankScore[MAX_RANKY];								//ランキングスコア情報
 int g_nRankCounter;											//点滅用カウンター
 
+int g_nGameScore = 0;
 //-------------------------------------------
 //初期化処理
 //-------------------------------------------
@@ -23,7 +24,7 @@ void InitRanking(void)
 {
 	//カウンターの初期化
 	g_nRankCounter = 60;
-
+    
 	//デバイスへのポインタ
 	LPDIRECT3DDEVICE9 pDevice;
 
@@ -32,12 +33,12 @@ void InitRanking(void)
 
 	//テクスチャの読み込み(背景)
 	D3DXCreateTextureFromFile(pDevice,
-		"data/TEXTURE/ranking000.jpg",
+		"data/TEXTURE/ranking000.png",
 		&g_pTextureRank[0]);
 
 	//テクスチャの読み込み(スコア)
 	D3DXCreateTextureFromFile(pDevice,
-		"data/TEXTURE/number001.png",
+		"data/TEXTURE/number000.png",
 		&g_pTextureRank[1]);
 
 	//頂点バッファの生成(背景)
@@ -186,61 +187,61 @@ void UninitRanking(void)
 //-------------------------------------------
 void UpdateRanking(void)
 {
-	////頂点情報へのポインタ
-	//VERTEX_2D *pVtx;
+	//頂点情報へのポインタ
+	VERTEX_2D *pVtx;
 
-	////頂点バッファをロックし、頂点情報へのポインタを取得
-	//g_pVtxBuffRank[1]->Lock(0, 0, (void**)&pVtx, 0);
+	//頂点バッファをロックし、頂点情報へのポインタを取得
+	g_pVtxBuffRank[1]->Lock(0, 0, (void**)&pVtx, 0);
 
-	//for (int nCntScore = 0; nCntScore < MAX_RANKY; nCntScore++)
-	//{
-	//	if (g_RankScore[nCntScore].nScore == GetScore())
-	//	{//自分のスコアがランクインしたら
-	//		//点滅
-	//		g_nRankCounter--;
-	//		for (int nCntX = 0; nCntX < MAX_RANKX; nCntX++)
-	//		{
-	//			if (0 == g_nRankCounter % 30)
-	//			{
-	//				//頂点カラーの設定
-	//				pVtx[0].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f);
-	//				pVtx[1].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f);
-	//				pVtx[2].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f);
-	//				pVtx[3].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f);
-	//			}
+	for (int nCntScore = 0; nCntScore < MAX_RANKY; nCntScore++)
+	{
+		if (g_RankScore[nCntScore].nScore == g_nGameScore)
+		{//自分のスコアがランクインしたら
+			//点滅
+			g_nRankCounter--;
+			for (int nCntX = 0; nCntX < MAX_RANKX; nCntX++)
+			{
+				if (0 == g_nRankCounter % 30)
+				{
+					//頂点カラーの設定
+					pVtx[0].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f);
+					pVtx[1].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f);
+					pVtx[2].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f);
+					pVtx[3].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f);
+				}
 
-	//			if (10 == g_nRankCounter % 30)
-	//			{
-	//				//頂点カラーの設定
-	//				pVtx[0].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.0f);
-	//				pVtx[1].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.0f);
-	//				pVtx[2].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.0f);
-	//				pVtx[3].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.0f);
-	//			}
+				if (10 == g_nRankCounter % 30)
+				{
+					//頂点カラーの設定
+					pVtx[0].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.0f);
+					pVtx[1].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.0f);
+					pVtx[2].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.0f);
+					pVtx[3].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.0f);
+				}
 
-	//			if (g_nRankCounter == 0)
-	//			{//カウンターが0になったら60に戻す
-	//				g_nRankCounter = 60;
-	//			}
-	//			pVtx += 4;		//頂点情報を4つ進める
-	//		}
-	//	}
-	//}
+				if (g_nRankCounter == 0)
+				{//カウンターが0になったら60に戻す
+					g_nRankCounter = 60;
+				}
+				pVtx += 4;		//頂点情報を4つ進める
+			}
+		}
+	}
 
-	////頂点バッファをアンロックする
-	//g_pVtxBuffRank[1]->Unlock();
+	//頂点バッファをアンロックする
+	g_pVtxBuffRank[1]->Unlock();
 
- //   // キーボードの入力状態を取得
- //   CInput_Keyboard *plnputKeyboard = CManager::GetInputKeyboard();
+    // キーボードの入力状態を取得
+    CInput_Keyboard *plnputKeyboard = CManager::GetInputKeyboard();
 
-	//if (plnputKeyboard->GetTrigger(DIK_RETURN) == true) // ENTERを押していたら
-	//{
-	//	g_nRankCounter = 0;		//カウンターを0に戻す
+	if (plnputKeyboard->GetTrigger(DIK_RETURN) == true) // ENTERを押していたら
+	{
+		g_nRankCounter = 0;		//カウンターを0に戻す
 
-	//	//PlaySound(SOUND_LABEL_SE000);		//SEを再生
-	//	//モード設定
- //       CManager::SetMode(CManager::MODE_TITLE);				//タイトル画面に移行
-	//}
+		//PlaySound(SOUND_LABEL_SE000);		//SEを再生
+		//モード設定
+        CManager::SetMode(CManager::MODE_TITLE);				//タイトル画面に移行
+	}
 }
 
 //-------------------------------------------
@@ -314,79 +315,87 @@ void ResetRanking(void)
 //-------------------------------------------
 //ランキングの設定
 //-------------------------------------------
-void SetRanking(void)
+void SetRanking()
 {
-	//int aPosTexU[5][MAX_RANKX];			//各桁の数字を格納
+	int aPosTexU[5][MAX_RANKX];			//各桁の数字を格納
 
-	//g_RankScore[5].nScore = GetScore();		//score.cppのスコアを獲得
+	g_RankScore[5].nScore = g_nGameScore;		//score.cppのスコアを獲得
 
-	////バブルソート
-	//for (int nCnt = 0; nCnt < 5; nCnt++)
-	//{
-	//	for (int nCnt1 = nCnt + 1; nCnt1 < 6; nCnt1++)
-	//	{
-	//		if (g_RankScore[nCnt].nScore < g_RankScore[nCnt1].nScore)
-	//		{
-	//			int nData = g_RankScore[nCnt].nScore;
-	//			g_RankScore[nCnt].nScore = g_RankScore[nCnt1].nScore;
-	//			g_RankScore[nCnt1].nScore = nData;
-	//		}
-	//	}
-	//}
+	//バブルソート
+	for (int nCnt = 0; nCnt < 5; nCnt++)
+	{
+		for (int nCnt1 = nCnt + 1; nCnt1 < 6; nCnt1++)
+		{
+			if (g_RankScore[nCnt].nScore < g_RankScore[nCnt1].nScore)
+			{
+				int nData = g_RankScore[nCnt].nScore;
+				g_RankScore[nCnt].nScore = g_RankScore[nCnt1].nScore;
+				g_RankScore[nCnt1].nScore = nData;
+			}
+		}
+	}
 
-	//FILE * pFile;			//ファイルポインタを宣言
+	FILE * pFile;			//ファイルポインタを宣言
 
-	////ランキング結果をファイルに書き出す
-	//pFile = fopen("Ranking.txt", "w");
-	//if (pFile != NULL)
-	//{
-	//	for (int nCount = 0; nCount < MAX_RANKY; nCount++)
-	//	{
-	//		//ファイルにランキングを書き出す
-	//		fprintf(pFile, "%d\n", g_RankScore[nCount].nScore);
-	//	}
-	//	fclose(pFile);
-	//}
-	//else
-	//{//ファイルが開けなかった場合
-	//	printf("ファイルが開けませんでした。");
-	//}
+	//ランキング結果をファイルに書き出す
+	pFile = fopen("Ranking.txt", "w");
+	if (pFile != NULL)
+	{
+		for (int nCount = 0; nCount < MAX_RANKY; nCount++)
+		{
+			//ファイルにランキングを書き出す
+			fprintf(pFile, "%d\n", g_RankScore[nCount].nScore);
+		}
+		fclose(pFile);
+	}
+	else
+	{//ファイルが開けなかった場合
+		printf("ファイルが開けませんでした。");
+	}
 
-	//for (int nCntY = 0; nCntY < MAX_RANKY; nCntY++)
-	//{
-	//	for (int nCntX = 0; nCntX < MAX_RANKX; nCntX++)
-	//	{
-	//		aPosTexU[nCntY][0] = g_RankScore[nCntY].nScore % 100000000 / 10000000;
-	//		aPosTexU[nCntY][1] = g_RankScore[nCntY].nScore % 10000000 / 1000000;
-	//		aPosTexU[nCntY][2] = g_RankScore[nCntY].nScore % 1000000 / 100000;
-	//		aPosTexU[nCntY][3] = g_RankScore[nCntY].nScore % 100000 / 10000;
-	//		aPosTexU[nCntY][4] = g_RankScore[nCntY].nScore % 10000 / 1000;
-	//		aPosTexU[nCntY][5] = g_RankScore[nCntY].nScore % 1000 / 100;
-	//		aPosTexU[nCntY][6] = g_RankScore[nCntY].nScore % 100 / 10;
-	//		aPosTexU[nCntY][7] = g_RankScore[nCntY].nScore % 10 / 1;
-	//	}
-	//}
+	for (int nCntY = 0; nCntY < MAX_RANKY; nCntY++)
+	{
+		for (int nCntX = 0; nCntX < MAX_RANKX; nCntX++)
+		{
+			aPosTexU[nCntY][0] = g_RankScore[nCntY].nScore % 100000000 / 10000000;
+			aPosTexU[nCntY][1] = g_RankScore[nCntY].nScore % 10000000 / 1000000;
+			aPosTexU[nCntY][2] = g_RankScore[nCntY].nScore % 1000000 / 100000;
+			aPosTexU[nCntY][3] = g_RankScore[nCntY].nScore % 100000 / 10000;
+			aPosTexU[nCntY][4] = g_RankScore[nCntY].nScore % 10000 / 1000;
+			aPosTexU[nCntY][5] = g_RankScore[nCntY].nScore % 1000 / 100;
+			aPosTexU[nCntY][6] = g_RankScore[nCntY].nScore % 100 / 10;
+			aPosTexU[nCntY][7] = g_RankScore[nCntY].nScore % 10 / 1;
+		}
+	}
 
-	////頂点情報へのポインタ
-	//VERTEX_2D *pVtx;
+	//頂点情報へのポインタ
+	VERTEX_2D *pVtx;
 
-	////頂点バッファをロックし、頂点情報へのポインタを取得
-	//g_pVtxBuffRank[1]->Lock(0, 0, (void**)&pVtx, 0);
+	//頂点バッファをロックし、頂点情報へのポインタを取得
+	g_pVtxBuffRank[1]->Lock(0, 0, (void**)&pVtx, 0);
 
-	////テクスチャ座標の更新
-	//for (int nCntY = 0; nCntY < MAX_RANKY; nCntY++)
-	//{
-	//	for (int nCntX = 0; nCntX < MAX_RANKX; nCntX++)
-	//	{
-	//		pVtx[0].tex = D3DXVECTOR2(0.1f * aPosTexU[nCntY][nCntX], 0.0f);
-	//		pVtx[1].tex = D3DXVECTOR2(0.1f * aPosTexU[nCntY][nCntX] + 0.1f, 0.0f);
-	//		pVtx[2].tex = D3DXVECTOR2(0.1f * aPosTexU[nCntY][nCntX], 1.0f);
-	//		pVtx[3].tex = D3DXVECTOR2(0.1f * aPosTexU[nCntY][nCntX] + 0.1f, 1.0f);
+	//テクスチャ座標の更新
+	for (int nCntY = 0; nCntY < MAX_RANKY; nCntY++)
+	{
+		for (int nCntX = 0; nCntX < MAX_RANKX; nCntX++)
+		{
+			pVtx[0].tex = D3DXVECTOR2(0.1f * aPosTexU[nCntY][nCntX], 0.0f);
+			pVtx[1].tex = D3DXVECTOR2(0.1f * aPosTexU[nCntY][nCntX] + 0.1f, 0.0f);
+			pVtx[2].tex = D3DXVECTOR2(0.1f * aPosTexU[nCntY][nCntX], 1.0f);
+			pVtx[3].tex = D3DXVECTOR2(0.1f * aPosTexU[nCntY][nCntX] + 0.1f, 1.0f);
 
-	//		pVtx += 4;
-	//	}
-	//}
+			pVtx += 4;
+		}
+	}
 
-	////頂点バッファをアンロックする
-	//g_pVtxBuffRank[1]->Unlock();
+	//頂点バッファをアンロックする
+	g_pVtxBuffRank[1]->Unlock();
+}
+
+//==========================================================
+// [GetGameScore]ゲームが終わったときにスコアを受け取る関数 Author: 工藤綾乃
+//==========================================================
+void GetGameScore(int nScore)
+{
+    g_nGameScore = nScore;
 }

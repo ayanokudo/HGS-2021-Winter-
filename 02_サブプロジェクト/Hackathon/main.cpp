@@ -33,16 +33,6 @@ int	g_nCountFPS;								// FPSカウンタ
 //--------------------------------------------------------------------------------
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
-#ifdef _DEBUG
-		// コンソールを作成する
-		AllocConsole();
-		// 標準入出力に割り当てる
-		FILE* fp = NULL;
-		// 現在のコード
-		freopen_s(&fp, "CONOUT$", "w", stdout);
-		printf("%s", "知りたい情報\n");
-#endif
-
 	WNDCLASSEX wcex =
 	{
 		sizeof(WNDCLASSEX),

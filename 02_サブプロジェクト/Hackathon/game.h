@@ -75,7 +75,14 @@ public:
 	static CPause *GetPause(void) { return m_pPause; }				// ポーズの取得
 	static CItem *GetItem(void) { return m_pItem; }					// アイテムの取得
 
+
+    // Get関数
+    static bool GetGame(void) { return m_IsGame; }// ゲームプレイ状態フラグ
+    // Set関数
+    static void SetIsGame(bool IsGame) { m_IsGame = IsGame;}// ゲームプレイ状態フラグ
+
 private:
+    // メンバ関数
 	static CPlayer *m_pPlayer;										// プレイヤーのポインタ
 	static CPlayerAI *m_pPlayerAI;									// プレイヤーAIのポインタ
 	static CBg *m_pBg;												// 背景のポインタ
@@ -92,6 +99,8 @@ private:
 
 	static RESULTMODE m_resultmode;									// リザルトモード				
 	static int m_MapData[MAX_LINE][MAX_COLUMN];						// マップの二次配列
+
+    static bool m_IsGame;// ゲームプレイ状態フラグ
 };
 
 #endif

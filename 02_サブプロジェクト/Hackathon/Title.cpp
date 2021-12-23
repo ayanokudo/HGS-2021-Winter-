@@ -10,6 +10,7 @@
 #include "Input_Keyboard.h"		// キー
 #include "fade.h"				// フェード
 #include "sound.h"				// サウンド
+#include "ranking.h"            // ランキング
 
 //-------------------------------------------------------------------------------
 // 静的メンバ変数宣言
@@ -194,6 +195,14 @@ void CTitle::Update(void)
 		// モードの設定
 		pFade->SetFade(CManager::MODE_TUTORIAL);
 	}
+
+    // 0キーでランキング画面遷移
+    if (pFade->GetFade() == CFade::FADE_NONE && plnputKeyboard->GetTrigger(DIK_0) == true)
+    {
+        // モードの設定
+        GetGameScore(-1);// スコアを点滅させないように設定
+        pFade->SetFade(CManager::MODE_RANKING);
+    }
 	// アニメーション処理
 	Animation();
 }

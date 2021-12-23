@@ -8,6 +8,8 @@
 #include "renderer.h"		// レンダリング
 #include "scene.h"			// ポリゴン
 
+#include "manager.h"        // ランキングモードかの確認用
+#include "ranking.h"        // ランキング更新用
 //*********************************************************************************
 // 静的メンバ変数
 //*********************************************************************************
@@ -155,6 +157,13 @@ void CRenderer::Update(void)
 {
 	// 全てのポリゴンの更新処理
 	CScene::UpdateAll();
+
+    // 現在のモードがランキングの場合
+    if (CManager::GetMode()==CManager::MODE_RANKING)
+    {
+        UpdateRanking();// ランキング更新
+    }
+    
 }
 
 //=============================================================================
@@ -177,6 +186,11 @@ void CRenderer::Draw(void)
 		// 全てのポリゴンの描画処理
 		CScene::DrawAll();
 
+        // 現在のモードがランキングの場合
+        if (CManager::GetMode() == CManager::MODE_RANKING)
+        {
+            DrawRanking();// ランキング更新
+        }
 #ifdef _DEBUG
 		// FPS表示
 		DrawFPS();

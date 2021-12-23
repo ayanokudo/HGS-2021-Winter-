@@ -177,7 +177,7 @@ void CResult::Update(void)
 	if (pFade->GetFade() == CFade::FADE_NONE&& plnputKeyboard->GetTrigger(DIK_RETURN) == true)
 	{
 		// ƒ^ƒCƒgƒ‹‚ÉˆÚ“®
-		pFade->SetFade(CManager::MODE_TITLE);
+		pFade->SetFade(CManager::MODE_RANKING);
 	}
 }
 

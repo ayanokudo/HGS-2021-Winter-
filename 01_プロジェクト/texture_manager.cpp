@@ -55,7 +55,7 @@ CTexture::~CTexture()
 //=============================================================================
 HRESULT CTexture::Init(void)
 {
-    LoadTextureFromTxt(TEXTURE_FILENAME);
+    //LoadTextureFromTxt(TEXTURE_FILENAME);
     //LoadTextureFromJson(MAP_TEXTURE_FILENAME);
     return S_OK;
 }

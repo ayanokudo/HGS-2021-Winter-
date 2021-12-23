@@ -23,8 +23,6 @@
 #include "item.h"				// アイテム
 #include "result.h"				// リザルト
 
-#include "PlayerAI.h"			// プレイヤーAI
-
 //-------------------------------------------------------------------------------
 // 静的メンバ変数宣言
 //-------------------------------------------------------------------------------
@@ -35,9 +33,11 @@ bool CPlayer::m_bCollison = false;
 //-------------------------------------------------------------------------------
 // マクロ定義
 //-------------------------------------------------------------------------------
-#define PLAYER_MOVE		(5.0f)			// 移動量
+#define PLAYER_MOVE		(100.0f)			// 移動量
 #define MAX_GRAVITY		(2.5f)			// 重力
 #define MAX_JUMP		(-35.0f)		// ジャンプ
+#define MIXPOS          (0.0)           // 左端限界値
+#define MAXPOS          (1000.0f)       // 右はし限界値
 
 //-------------------------------------------------------------------------------
 // コンストラク
@@ -150,6 +150,8 @@ HRESULT CPlayer::Init(D3DXVECTOR3 pos, D3DXVECTOR3 scale)
 
 	m_bCollison = false;
 
+    m_state = STATE_NORMAL;
+
 	// 結び付ける
 	m_size = scale;
 
@@ -195,78 +197,25 @@ void CPlayer::Update(void)
 	CFade *pFade;
 	pFade = CManager::GetFade();
 
-	// ライフ関係
-	CLife *pLife;
-	pLife = CGame::GetLife();
-
-	// AIの移動量取得
-	D3DXVECTOR3 PosPlayerAI;
-	CPlayerAI *pPlayerAI;
-	pPlayerAI = CGame::GetPlayerAI();
-	PosPlayerAI = pPlayerAI->GetPos();
-
-
-
 	if (pFade->GetFade() == CFade::FADE_NONE)
 	{// フェード中は動かない
 
-		// プレイヤーの操作関係
-		if (plnputKeyboard->GetTrigger(DIK_W) == true && m_bJump == false)
-		{//ジャンプの処理(2段ジャンプの制御)
-
-			m_move.y = MAX_JUMP;
-			m_bJump = true;
-			printf("%s", "jumpした\n");		// デバックログ
-
-			// SEの再生
-			pSound->Play(CSound::SOUND_LABEL_SE_JUMP);
-		}
-
 		// プレイヤーの移動処理
-		if (plnputKeyboard->GetPress(DIK_A) == true)
+		if (plnputKeyboard->GetTrigger(DIK_A))
 		{// Aキーを押した
 
-			m_move.x -= 5.0f;
+			m_move.x -= PLAYER_MOVE;
+            // SE:カチッ
 		}
 
-		if (plnputKeyboard->GetPress(DIK_D) == true)
+		if (plnputKeyboard->GetTrigger(DIK_D))
 		{// Dキーを押した
-			m_move.x += 5.0f;
+
+			m_move.x += PLAYER_MOVE;
+            // SE:カチッ
 		}
 	}
-	// 重力
-	m_move.y += MAX_GRAVITY;
 
-	// AIが移動したかどうかの情報を取得
-	m_bMoveAI = pPlayerAI->GetMovement();
-
-	if (m_bMoveAI == false)
-	{// AIが移動していなかったら
-		if (m_bMove == true)
-		{// プレイヤーが移動していたら
-			if (m_Place == POSPLAYER_LEFT)
-			{// プレイヤーがAIの右側にいたら
-				Pos.x += 15.0f;
-				if (Pos.x > PosPlayerAI.x + INTERVAL)
-				{
-					m_bMove = false;
-					m_Place = POSPLAYER_RIGHT;
-				}
-			}
-			else if (m_Place == POSPLAYER_RIGHT)
-			{// プレイヤーがAIの左側にいたら
-				Pos.x += -15.0f;
-				if (Pos.x < PosPlayerAI.x - INTERVAL)
-				{
-					m_bMove = false;
-					m_Place = POSPLAYER_LEFT;
-				}
-			}
-			m_move.x = 0.0f;
-		}
-		// 情報を渡す
-		pPlayerAI->SetMovement(m_bMoveAI);
-	}
 	// 慣性
 	m_move.x += (0.0f - m_move.x) * 0.4f;
 
@@ -274,57 +223,8 @@ void CPlayer::Update(void)
 	m_PosOld.x = Pos.x;
 	m_PosOld.y = Pos.y;
 
-	// 移動制御
-	if (Pos.y > 550.0f)
-	{// プレイヤーとプレイヤーAIの当たり判定(点)
-		if (Pos.x < PosPlayerAI.x + INTERVAL &&m_Place == POSPLAYER_RIGHT)
-		{// 左
-			Pos.x = PosPlayerAI.x + INTERVAL;
-
-			if (m_bMoveAI == false)
-			{
-				if (m_bJump == false)
-				{// ジャンプしていなかったら
-					m_move.y = MAX_JUMP;
-					m_bMove = true;
-					m_bJump = true;
-
-					// SEの再生
-					pSound->Play(CSound::SOUND_LABEL_SE_JUMP);
-				}
-
-			}
-		}
-		if (Pos.x > PosPlayerAI.x - INTERVAL &&m_Place == POSPLAYER_LEFT)
-		{// 右
-			Pos.x = PosPlayerAI.x - INTERVAL;
-
-			if (m_bMoveAI == false)
-			{
-				if (m_bJump == false)
-				{// ジャンプしていなかったら
-					m_move.y = MAX_JUMP;
-					m_bMove = true;
-					m_bJump = true;
-
-					// SEの再生
-					pSound->Play(CSound::SOUND_LABEL_SE_JUMP);
-				}
-			}
-		}
-	}
 	// 移動量加算
 	Pos += m_move;
-
-	//	プレイヤーと壁の当たり判定
-	if (Pos.x < PosPlayerAI.x - 300.0f)
-	{
-		Pos.x = PosPlayerAI.x - 300.0f;
-	}
-	if (Pos.x > PosPlayerAI.x + 300.0f)
-	{
-		Pos.x = PosPlayerAI.x + 300.0f;
-	}
 
 	// プレイヤーと画面の当たり判定
 	if (Pos.x < 0.0)
@@ -336,20 +236,8 @@ void CPlayer::Update(void)
 		Pos.x = 1280.0f;
 	}
 
-	// プレイヤーが地面から落ちたらライフを減らす処理
-	if (Pos.y - MAX_PLAYER_Y > 720)
-	{
-		// ライフを減らす
-		pLife->SubtractLife(1);
-	}
 	// 位置の設定
 	SetPosition(Pos, m_size);
-
-	// 変数宣言
-	D3DXVECTOR3 PosEnemy;
-	D3DXVECTOR3 ScaleEnemy;
-	D3DXVECTOR3 MoveEnemy;
-
 
 	// 敵の情報
 	CEnemy *pEnemy;
@@ -368,76 +256,45 @@ void CPlayer::Update(void)
 				CScene::OBJTYPE objType;
 				objType = pScene->GetObjType();
 
-				//if (objType == CScene::OBJTYPE_ENEMY)
-				//{// プレイヤーに当たったオブジェクトタイプが敵だったら
-				//
-				//
-				//	// 敵の位置とサイズを取得
-				//	PosEnemy = pScene->GetPos();
-				//	ScaleEnemy = pScene->GetScale();
-				//	
-				//
-				//	pEnemy = (CEnemy*)pScene;
-				//
-				//	// プレイヤーと敵の当たり判定
-				//	if (Collision(Pos, m_size, PosEnemy, ScaleEnemy) == true)
-				//	{
-				//		//// 敵を小さくする
-				//		//ScaleEnemy.x -= 10.0f;
-				//		//ScaleEnemy.y -= 10.0f;
-				//
-				//		//pEnemy->SetScale(ScaleEnemy);
-				//
-				//		// 当たった
-				//		m_bCollison = true;
-				//
-				//		m_nCntEnemy ++;
-				//		m_nCnt++;
-				//
-				//		// 敵爆発の生成
-				//		//	CExplosion::Create(PosEnemy, D3DXVECTOR3(50, 50, 0));
-				//
-				//		// SEの追加
-				//		//	pSound->Play(CSound::SOUND_LABEL_SE_EXPLOSION);
-				//		//	pSound->Play(CSound::SOUND_LABEL_SE_DAMAGE);
-				//
-				//		
-				//
-				//		//if (m_nCntColr >= 3)
-				//		//{
-				//		//	// 敵の破棄
-				//			//pScene->Uninit();
-				//		//}
-				//
-				//		// ダメージ状態
-				//		//m_State = PLAYER_DAMAGE;
-				//
-				//		//}
-				//	}
-				//}
+                if (objType == CScene::OBJTYPE_ENEMY)
+                {// プレイヤーに当たったオブジェクトタイプが敵だったら
+
+                        // 変数宣言
+                    D3DXVECTOR3 PosItem;
+                    D3DXVECTOR3 SizeItem;
+                    // 敵の位置とサイズを取得
+                    PosItem = pScene->GetPos();
+                    SizeItem = pScene->GetScale();
+
+                    // プレイヤーとアイテムの当たり判定
+                    if (Collision(Pos, m_size, PosItem, SizeItem) == true)
+                    {
+                        m_state = STATE_DEATH;
+                    }
+                }
 
 				// プレイヤーに当たったオブジェクトタイプがアイテムだったら
-				if (objType == CScene::OBJTYPE_ITEM)
-				{
-					// 変数宣言
-					D3DXVECTOR3 PosItem;
-					D3DXVECTOR3 SizeItem;
+				//if (objType == CScene::OBJTYPE_ITEM)
+				//{
+				//	// 変数宣言
+				//	D3DXVECTOR3 PosItem;
+				//	D3DXVECTOR3 SizeItem;
 
-					// 敵の位置とサイズを取得
-					PosItem = pScene->GetPos();
-					SizeItem = pScene->GetScale();
+				//	// 敵の位置とサイズを取得
+				//	PosItem = pScene->GetPos();
+				//	SizeItem = pScene->GetScale();
 
-					// アイテム情報
-					CItem *pIteme;
-					pIteme = (CItem*)pScene;
+				//	// アイテム情報
+				//	CItem *pIteme;
+				//	pIteme = (CItem*)pScene;
 
-					// プレイヤーとアイテムの当たり判定
-					if (Collision(Pos, m_size, PosItem, SizeItem) == true)
-					{
-						// アイテムをとった
-						m_bItem = true;
-					}
-				}
+				//	// プレイヤーとアイテムの当たり判定
+				//	if (Collision(Pos, m_size, PosItem, SizeItem) == true)
+				//	{
+				//		// アイテムをとった
+				//		m_bItem = true;
+				//	}
+				//}
 			}
 		}
 	}
@@ -451,24 +308,18 @@ void CPlayer::Update(void)
 	//	m_TexNow = (D3DXVECTOR2((float)m_nCnt, 0.0f));
 	//}
 
-	if (m_bCollison == true)
-	{
-			// 分裂
-	//		pEnemy->Create(PosEnemy, ScaleEnemy / 2, m_move);
-			if (m_nCnt % 70 == 0)
-			{
-				// 分裂
-				pEnemy->Create(PosEnemy, ScaleEnemy / 2, m_move);
-				m_bCollison = false;
-			}
-
-	}
-
 	// プレイヤーが移動している時のアニメーション
 	Animation();
 
 	// アニメーションの設定
 	SetTex(m_TexNow, m_Tex);
+
+    // 死亡状態
+    if (m_state == STATE_DEATH)
+    {
+        // ゲーム終了
+        CGame::SetIsGame(false);
+    }
 }
 
 //-------------------------------------------------------------------------------
@@ -501,7 +352,6 @@ void CPlayer::Animation(void)
 	D3DXVECTOR3 PosPlayerAI;
 	CPlayerAI *pPlayerAI;
 	pPlayerAI = CGame::GetPlayerAI();
-	PosPlayerAI = pPlayerAI->GetPos();
 
 	// プレイヤーを反転
 	if (Pos.x < PosPlayerAI.x)

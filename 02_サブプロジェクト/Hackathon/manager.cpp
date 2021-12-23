@@ -13,6 +13,7 @@
 #include "game.h"				// ゲームシーン
 #include "Title.h"				// タイトル
 #include "tutorial.h"			// チュートリアル
+#include "ranking.h"
 #include "result.h"				// リザルト
 #include "fade.h"				// フェード
 
@@ -262,6 +263,10 @@ void CManager::SetMode(MODE mode)
 			m_pResult->Uninit();
 			m_pResult = NULL;
 		}
+
+        // ランキングシーン
+    case MODE_RANKING:
+        UninitRanking();
 		break;
 	}
 
@@ -331,6 +336,12 @@ void CManager::SetMode(MODE mode)
 				 m_pResult->Init({ SCREEN_WIDTH / 2,SCREEN_HEIGHT / 2,0.0f }, { SCREEN_WIDTH,SCREEN_HEIGHT,0.0f });
 			 }
 		 }
+
+         // ランキングシーン
+     case MODE_RANKING:
+         InitRanking();
+         break;
+
 		 break;
 	 }
 }

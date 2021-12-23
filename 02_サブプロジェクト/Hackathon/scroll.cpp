@@ -11,7 +11,6 @@
 #include "scene.h"
 #include "game.h"
 #include "player.h"
-#include "PlayerAI.h"
 #include "block.h"
 #include "bg.h"
 #include "enemy.h"

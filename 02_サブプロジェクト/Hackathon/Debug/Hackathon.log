@@ -1,2 +1,7 @@
-﻿  Hackathon.vcxproj -> C:\Users\student\Desktop\Git\HGS-2021-Winter-\02_サブプロジェクト\Hackathon\Debug\Hackathon.exe
+﻿  player.cpp
+c:\users\student\desktop\git\hgs-2021-winter-\02_サブプロジェクト\hackathon\player.cpp(243): warning C4101: 'pEnemy': ローカル変数は 1 度も使われていません。
+  enemy.cpp
+c:\users\student\desktop\git\hgs-2021-winter-\02_サブプロジェクト\hackathon\enemy.cpp(329): warning C4101: 'pPlayerAI': ローカル変数は 1 度も使われていません。
+  コードを生成中...
+  Hackathon.vcxproj -> C:\Users\student\Desktop\Git\HGS-2021-Winter-\02_サブプロジェクト\Hackathon\Debug\Hackathon.exe
   Hackathon.vcxproj -> C:\Users\student\Desktop\Git\HGS-2021-Winter-\02_サブプロジェクト\Hackathon\Debug\Hackathon.pdb (Full PDB)

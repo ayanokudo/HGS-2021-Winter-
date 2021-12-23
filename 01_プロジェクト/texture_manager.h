@@ -52,8 +52,8 @@ private:
     int m_nCntLoadTextureByTxt; // テキストファイルから読み込んだテクスチャの数
     std::map<std::string, int> m_nameIndexMap;	//名前と番号の対応配列
 
-    HRESULT LoadTextureFromTxt(std::string path);	//テキストからテクスチャを読み込み
-    HRESULT LoadTextureFromJson(std::string path);	//JSONからテクスチャを読み込み
+    //HRESULT LoadTextureFromTxt(std::string path);	//テキストからテクスチャを読み込み
+    //HRESULT LoadTextureFromJson(std::string path);	//JSONからテクスチャを読み込み
 
 };
 #endif

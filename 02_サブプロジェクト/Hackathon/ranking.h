@@ -37,4 +37,6 @@ void DrawRanking(void);
 void ResetRanking(void);
 void SetRanking(void);
 
+void GetGameScore(int nScore);// ゲームが終わったときにスコアを受け取る関数
+
 #endif

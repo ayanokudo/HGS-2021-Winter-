@@ -9,7 +9,6 @@
 #include "renderer.h"		// レンダラ
 #include "scene2D.h"		// 2Dポリゴン
 #include "player.h"			// プレイヤー
-#include "playerAI.h"		// プレイヤーAI
 #include "game.h"			// ゲーム
 
 //-------------------------------------------------------------------------------
@@ -143,13 +142,9 @@ void CBlock::Update(void)
 	D3DXVECTOR3 PlayerAIMove;
 	CPlayerAI *pPlayerAI;
 	pPlayerAI = CGame::GetPlayerAI();
-	PlayerAIMove = pPlayerAI->GetMove();
 
 	// 代入
 	m_pos = Pos;
-
-	// プレイヤーの過去情報
-	pPlayerAI->GetPosOld();
 
 	// ブロックとプレイヤーの当たり判定
 	Collision();
@@ -239,10 +234,6 @@ bool CBlock::Collision()
 					pPlayerAI = (CPlayerAI*)pScene;		// キャスト
 
 					// 代入
-					PosPlayerAI = pPlayerAI->GetPosition();
-					SizePlayerAI = pPlayerAI->GetSize();
-					MovePlayerAI = pPlayerAI->GetMove();
-					PosOldPlayerAI = pPlayerAI->GetPosOld();
 
 					if (PosPlayerAI.x + SizePlayerAI.x / 2.0f > m_pos.x - m_size.x / 2.0f &&
 						PosPlayerAI.x - SizePlayerAI.x / 2.0f < m_pos.x + m_size.x / 2.0f &&
@@ -252,11 +243,6 @@ bool CBlock::Collision()
 						PosPlayerAI.y = m_pos.y - m_size.y / 2.0f - SizePlayerAI.y / 2.0f;
 
 						MovePlayerAI.y = 0.0f;
-
-						pPlayerAI->SetMove(MovePlayerAI);
-
-						// プレイヤーAIの位置を設定
-						pPlayerAI->SetPosition(PosPlayerAI, SizePlayerAI);
 
 						if (m_bCollision == false)
 						{

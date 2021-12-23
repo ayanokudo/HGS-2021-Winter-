@@ -9,7 +9,6 @@
 #include "renderer.h"			// レンダラ
 #include "scene2D.h"			// 2Dポリゴン
 #include "Input_Keyboard.h"		// キーボード
-#include "playerAI.h"				// プレイヤー
 #include "game.h"				// ゲーム
 
 #include "item.h"
@@ -147,7 +146,6 @@ void CBg::Update(void)
 	D3DXVECTOR3 PlayerAIMove;
 	CPlayerAI *pPlayerAI;
 	pPlayerAI = CGame::GetPlayerAI();
-	PlayerAIMove = pPlayerAI->GetMove();
 
 	// キーボード関係
 	CInput_Keyboard *plnputKeyboard;

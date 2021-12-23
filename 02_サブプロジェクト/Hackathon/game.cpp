@@ -27,11 +27,12 @@
 #include "fade.h"				// フェード
 #include "Bullet_UI.h"			// 弾UI
 #include "block.h"				// ブロック
-#include "PlayerAI.h"			// プレイヤーAI
+//#include "PlayerAI.h"			// プレイヤーAI
 #include "effect.h"				// エフェクト
 #include "Pause.h"				// ポーズ
 #include "item.h"				// アイテム
 #include "SpawnEnemy.h"
+#include "ranking.h"
 
 //-------------------------------------------------------------------------------
 // 静的メンバ変数定義
@@ -51,6 +52,7 @@ CPause *CGame::m_pPause = NULL;
 CItem *CGame::m_pItem = NULL;
 int CGame::m_MapData[MAX_LINE][MAX_COLUMN] = {};
 CGame::RESULTMODE CGame::m_resultmode = RESULTMODE_NONE;
+bool CGame::m_IsGame = false;
 
 //-------------------------------------------------------------------------------
 // マクロ定義
@@ -76,6 +78,8 @@ CGame::~CGame()
 //-------------------------------------------------------------------------------
 HRESULT CGame::Init(D3DXVECTOR3 pos, D3DXVECTOR3 scale)
 {
+    // ゲームフラグはtrueにしておく
+    m_IsGame = true;
 	// 全てのテクスチャ読み込み
 	CGame::LoadAll();
 
@@ -89,7 +93,7 @@ HRESULT CGame::Init(D3DXVECTOR3 pos, D3DXVECTOR3 scale)
 	m_pPlayer = CPlayer::Create(D3DXVECTOR3(SCREEN_WIDTH / 2 - INTERVAL, SCREEN_HEIGHT / 2, 0), D3DXVECTOR3(MAX_PLAYER_X, MAX_PLAYER_Y, 0));
 
 	// プレイヤーAIの生成
-	m_pPlayerAI = CPlayerAI::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0), D3DXVECTOR3(198.0f*0.5, 277.0f*0.5, 0));
+	//m_pPlayerAI = CPlayerAI::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0), D3DXVECTOR3(198.0f*0.5, 277.0f*0.5, 0));
 
 	// スコアの生成
 	m_pScore = CScore::Create(D3DXVECTOR3(SCREEN_WIDTH - (NUMBER_WIDTH * 4), NUMBER_HEIGHT / 2, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0));
@@ -107,8 +111,8 @@ HRESULT CGame::Init(D3DXVECTOR3 pos, D3DXVECTOR3 scale)
 	m_pPause = CPause::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0), D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0));
 
 	// 敵の情報
-	CSpawnEnemy::LoadSpawnEnemyData();
-
+	//CSpawnEnemy::LoadSpawnEnemyData();
+    CEnemy::Create({ 600,0.0,0.0 }, { 50,50,0.0 }, { 0.0,5.0,0.0 });
 	// マップ読み込み
 	FILE *pFile;
 	int nCountX = 0;
@@ -116,59 +120,6 @@ HRESULT CGame::Init(D3DXVECTOR3 pos, D3DXVECTOR3 scale)
 	char aLine[256];
 
 	int MapData[MAX_LINE][MAX_COLUMN] = {};
-
-	pFile = fopen("data/map/test.csv", "r");
-
-	// NULLチェック
-	if (pFile != NULL)
-	{
-		// ロードの処理
-		while (fgets(aLine, 256, pFile) != NULL)
-		{// 1列ずつ読み込む
-
-			nCountX = 0;
-
-			char *pToken;						// 分離したやつを格納する
-			pToken = strtok(aLine, ",");		// 分離
-			while (pToken != NULL)
-			{
-				int nNum;
-				nNum = atoi(pToken);			// 整数にする
-
-				// 代入
-				m_MapData[nCountY][nCountX] = nNum;
-
-				// 代入
-				pToken = strtok(NULL, ",");
-
-				nCountX++;
-			}
-			nCountY++;
-		}
-
-		// マップの生成
-		for (int nCountX = 0; nCountX < MAX_COLUMN; nCountX++)
-		{
-			for (int nCountY = 0; nCountY < MAX_LINE; nCountY++)
-			{
-				 if (m_MapData[nCountY][nCountX] == 2)
-				{// Excelの数字が2の時
-					// ブロックの生成
-					m_pBlock = CBlock::Create(D3DXVECTOR3(0.0f + (nCountX * BLOCK_X) + BLOCK_X / 2.0f,
-						0.0f + (nCountY * BLOCK_Y) + BLOCK_Y / 2.0f,
-						0.0f),
-						BLOCK_SIZE);
-				}
-			}
-		}
-		// ファイルを閉じる
-		fclose(pFile);
-	}
-	else
-	{
-
-	}
-
 
 	// サウンド関係
 	CSound *pSound;
@@ -208,46 +159,41 @@ void CGame::Update(void)
 	CInput_Keyboard *plnputKeyboard;
 	plnputKeyboard = CManager::GetInputKeyboard();
 
-	// モード関係
-	CManager::MODE pManager;
-	pManager = CManager::GetMode();
-
 	// フェード関係
 	CFade *pFade;
 	pFade = CManager::GetFade();
 
 	// 敵の生成
-	CSpawnEnemy::SpawnEnemy();
+	//CSpawnEnemy::SpawnEnemy();
 
 	// ライフが0になったら
-	if (m_pLife->GetLife() == 0 && pFade->GetFade() == CFade::FADE_NONE)
-	{
-		m_resultmode = RESULTMODE_GAMEOVER;
-		// タイトルに移動する
-		pFade->SetFade(CManager::MODE_RESULT);
-	}
+	//if (m_pLife->GetLife() == 0 && pFade->GetFade() == CFade::FADE_NONE)
+	//{
+	//	m_resultmode = RESULTMODE_GAMEOVER;
+	//	// タイトルに移動する
+	//	pFade->SetFade(CManager::MODE_RESULT);
+	//}
 
-	// クリア条件を満たしたとき
-	if (pFade->GetFade() == CFade::FADE_NONE && m_pPlayerAI->GetItem() == true && m_pPlayer->GetItem() == true)
+    // ランダムなタイミングで敵を生成
+
+
+
+    // エンターを押したとき
+    if (pFade->GetFade() == CFade::FADE_NONE && plnputKeyboard->GetTrigger(DIK_RETURN) == true)
+    {
+        m_IsGame = false;
+    }
+
+	// ゲーム終了フラグが立ったとき
+	if (pFade->GetFade() == CFade::FADE_NONE && !m_IsGame)
 	{
         // スコアをランキングに送信
-
-
 		m_resultmode = RESULTMODE_GAMECLEAR;
-		// タイトルに移動する
-		pFade->SetFade(CManager::MODE_RESULT);
+        // モードの設定
+        GetGameScore(m_pScore->GetScore());// ランキングにスコアを送信
+        pFade->SetFade(CManager::MODE_RESULT);  // ランキングモードに変更
 
 	}
-
-	// エンターを押したとき
-	if (pFade->GetFade() == CFade::FADE_NONE && plnputKeyboard->GetTrigger(DIK_RETURN) == true)
-	{
-		m_resultmode = RESULTMODE_GAMECLEAR;
-
-		// モードの設定
-		pFade->SetFade(CManager::MODE_RESULT);
-	}
-
 
 }
 
@@ -267,7 +213,6 @@ void CGame::LoadAll(void)
 	// テクスチャの読み込み
 	CBullet::Load();
 	CExplosion::Load();
-	CPlayerAI::Load();
 	CPlayer::Load();
 	CBg::Load();
 	CEnemy::Load();
@@ -288,7 +233,6 @@ void CGame::UnloadAll(void)
 	// テクスチャを破棄
 	CBullet::Unload();
 	CExplosion::Unload();
-	CPlayerAI::Unload();
 	CPlayer::Unload();
 	CBg::Unload();
 	CEnemy::Unload();

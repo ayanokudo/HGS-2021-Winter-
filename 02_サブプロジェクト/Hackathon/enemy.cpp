@@ -9,7 +9,6 @@
 #include "renderer.h"		// レンダラ
 #include "scene2D.h"		// 2Dポリゴン
 #include "game.h"			// ゲーム
-#include "PlayerAI.h"		// プレイヤーAI
 #include "player.h"
 
 //-------------------------------------------------------------------------------
@@ -216,8 +215,6 @@ void CEnemy::Update(void)
 
 //	Pos.y += 6.0f;
 
-
-
 	// 敵とオブジェクトの当たり判定
 	for (int nCntPriority = 0; nCntPriority < PRIORITY_MAX; nCntPriority++)
 	{
@@ -330,7 +327,6 @@ D3DXVECTOR3 CEnemy::MoveSearch(D3DXVECTOR3 move)
 	// AI関係
 	D3DXVECTOR3 PosPlayerAI;
 	CPlayerAI * pPlayerAI;
-	PosPlayerAI = pPlayerAI->GetPos();
 
 	// 保存用
 	D3DXVECTOR3 moveAI;
