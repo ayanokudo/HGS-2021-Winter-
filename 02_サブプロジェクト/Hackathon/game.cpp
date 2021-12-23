@@ -230,9 +230,13 @@ void CGame::Update(void)
 	// クリア条件を満たしたとき
 	if (pFade->GetFade() == CFade::FADE_NONE && m_pPlayerAI->GetItem() == true && m_pPlayer->GetItem() == true)
 	{
+        // スコアをランキングに送信
+
+
 		m_resultmode = RESULTMODE_GAMECLEAR;
 		// タイトルに移動する
 		pFade->SetFade(CManager::MODE_RESULT);
+
 	}
 
 	// エンターを押したとき
@@ -243,6 +247,8 @@ void CGame::Update(void)
 		// モードの設定
 		pFade->SetFade(CManager::MODE_RESULT);
 	}
+
+
 }
 
 //-------------------------------------------------------------------------------

@@ -40,6 +40,7 @@
     <ClCompile Include="player.cpp" />
     <ClCompile Include="PlayerAI.cpp" />
     <ClCompile Include="polygon.cpp" />
+    <ClCompile Include="ranking.cpp" />
     <ClCompile Include="renderer.cpp" />
     <ClCompile Include="result.cpp" />
     <ClCompile Include="scene.cpp" />
@@ -76,7 +77,9 @@
     <ClInclude Include="player.h" />
     <ClInclude Include="PlayerAI.h" />
     <ClInclude Include="polygon.h" />
+    <ClInclude Include="ranking.h" />
     <ClInclude Include="renderer.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="result.h" />
     <ClInclude Include="scene.h" />
     <ClInclude Include="scene2D.h" />
@@ -86,6 +89,12 @@
     <ClInclude Include="SpawnEnemy.h" />
     <ClInclude Include="Title.h" />
     <ClInclude Include="tutorial.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="data\ICO\icon1.ico" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{28338DA7-414B-4A82-9EC3-2CE5CC1C45CB}</ProjectGuid>
