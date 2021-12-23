@@ -1,6 +1,6 @@
 //-------------------------------------------
 //
-//ランキング情報[ranking.h]
+//ランキング情報[ranking.h](未完成)
 //Author:平野舞
 //
 //-------------------------------------------
@@ -30,11 +30,11 @@ typedef struct
 }Rank;
 
 //プロトタイプ宣言
-void InitRanking(void);		//ランキングの初期化処理
-void UninitRanking(void);	//ランキングの終了処理
-void UpdateRanking(void);	//ランキングの更新処理
-void DrawRanking(void);		//ランキングの描画処理
-void ResetRanking(void);	//ランキングのリセット処理
-void SetRanking(void);		//ランキングの設定処理
+void InitRanking(void);
+void UninitRanking(void);
+void UpdateRanking(void);
+void DrawRanking(void);
+void ResetRanking(void);
+void SetRanking(void);
 
 #endif

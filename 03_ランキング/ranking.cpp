@@ -11,15 +11,16 @@ LPDIRECT3DTEXTURE9 g_pTextureRank[MAX_TEX] = {};			//テクスチャへのポインタ
 LPDIRECT3DVERTEXBUFFER9 g_pVtxBuffRank[MAX_TEX] = {};		//頂点バッファへのポインタ
 D3DXVECTOR3 g_posRank[MAX_RANKY][MAX_RANKX];				//スコアの位置
 Rank g_RankScore[MAX_RANKY];								//ランキングスコア情報
-int g_nRank;
-int g_nRankUpdata = -1;										//更新ランクNo.
-int g_nTimerRanking;										//ランキング画面表示タイマー
+int g_nRankCounter;											//点滅用カウンター
 
 //-------------------------------------------
 //初期化処理
 //-------------------------------------------
 void InitRanking(void)
 {
+	//カウンターの初期化
+	g_nRankCounter = 60;
+
 	//デバイスへのポインタ
 	LPDIRECT3DDEVICE9 pDevice;
 
@@ -174,20 +175,57 @@ void UninitRanking(void)
 //-------------------------------------------
 void UpdateRanking(void)
 {
-	/*if (g_nRankUpdata != -1)
+	//頂点情報へのポインタ
+	VERTEX_2D *pVtx;
+
+	//頂点バッファをロックし、頂点情報へのポインタを取得
+	g_pVtxBuffRank[1]->Lock(0, 0, (void**)&pVtx, 0);
+
+	for (int nCntScore = 0; nCntScore < MAX_RANKY; nCntScore++)
 	{
+		if (g_RankScore[nCntScore].nScore == GetScore())
+		{//自分のスコアがランクインしたら
+			//点滅
+			g_nRankCounter--;
+			for (int nCntX = 0; nCntX < MAX_RANKX; nCntX++)
+			{
+				if (0 == g_nRankCounter % 30)
+				{
+					//頂点カラーの設定
+					pVtx[0].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f);
+					pVtx[1].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f);
+					pVtx[2].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f);
+					pVtx[3].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f);
+				}
 
-	}*/
-	//if(一致時間経過 or キー入力)
-	//{
+				if (10 == g_nRankCounter % 30)
+				{
+					//頂点カラーの設定
+					pVtx[0].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.0f);
+					pVtx[1].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.0f);
+					pVtx[2].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.0f);
+					pVtx[3].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.0f);
+				}
 
-	//}
+				if (g_nRankCounter == 0)
+				{//カウンターが0になったら60に戻す
+					g_nRankCounter = 60;
+				}
+				pVtx += 4;		//頂点情報を4つ進める
+			}
+		}
+	}
+
+	//頂点バッファをアンロックする
+	g_pVtxBuffRank[1]->Unlock();
 
 	if (GetKeyboardTrigger(DIK_RETURN) == true)
-	{//ENTER1キーを押されたら
-		PlaySound(SOUND_LABEL_SE000);
+	{
+		g_nRankCounter = 0;		//カウンターを0に戻す
+
+		PlaySound(SOUND_LABEL_SE000);		//SEを再生
 		//モード設定
-		SetFade(MODE_TITLE);
+		SetFade(MODE_TITLE);				//タイトル画面に移行
 	}
 }
 
