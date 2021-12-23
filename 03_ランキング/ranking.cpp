@@ -26,16 +26,17 @@ void InitRanking(void)
 	//デバイスの取得
 	pDevice = GetDevice();
 
-	//テクスチャの読み込み
+	//テクスチャの読み込み(背景)
 	D3DXCreateTextureFromFile(pDevice,
 		"data/TEXTURE/ranking000.jpg",
 		&g_pTextureRank[0]);
 
+	//テクスチャの読み込み(スコア)
 	D3DXCreateTextureFromFile(pDevice,
 		"data/TEXTURE/number001.png",
 		&g_pTextureRank[1]);
 
-	//頂点バッファの生成
+	//頂点バッファの生成(背景)
 	pDevice->CreateVertexBuffer(sizeof(VERTEX_2D) * 4 ,
 		D3DUSAGE_WRITEONLY,
 		FVF_VERTEX_2D,
@@ -43,6 +44,7 @@ void InitRanking(void)
 		&g_pVtxBuffRank[0],
 		NULL);
 
+	//頂点バッファの生成(スコア)
 		pDevice->CreateVertexBuffer(sizeof(VERTEX_2D) * 4 * MAX_RANKX * 5,
 			D3DUSAGE_WRITEONLY,
 			FVF_VERTEX_2D,
@@ -50,6 +52,7 @@ void InitRanking(void)
 			&g_pVtxBuffRank[1],
 			NULL);
 
+	//背景
 	//頂点情報へのポインタ
 	VERTEX_2D *pVtx;
 
@@ -83,6 +86,7 @@ void InitRanking(void)
 	//頂点バッファをアンロックする
 	g_pVtxBuffRank[0]->Unlock();
 
+	//スコア
 	//頂点バッファをロックし、頂点情報へのポインタを取得
 	g_pVtxBuffRank[1]->Lock(0, 0, (void**)&pVtx, 0);
 
@@ -180,7 +184,7 @@ void UpdateRanking(void)
 	//}
 
 	if (GetKeyboardTrigger(DIK_RETURN) == true)
-	{
+	{//ENTER1キーを押されたら
 		PlaySound(SOUND_LABEL_SE000);
 		//モード設定
 		SetFade(MODE_TITLE);
@@ -204,7 +208,7 @@ void DrawRanking(void)
 	//頂点フォーマットの設定
 	pDevice->SetFVF(FVF_VERTEX_2D);
 
-	//テクスチャ設定
+	//テクスチャ設定(背景)
 	pDevice->SetTexture(0, g_pTextureRank[0]);
 
 	//ポリゴンの描画
@@ -217,6 +221,7 @@ void DrawRanking(void)
 	pDevice->SetFVF(FVF_VERTEX_2D);
 	int nCount = 0;
 
+	//スコア
 	for (int nCntY = 0; nCntY < 5; nCntY++)
 	{
 		for (int nCntX = 0; nCntX < MAX_RANKX; nCntX++, nCount++)
@@ -235,12 +240,6 @@ void DrawRanking(void)
 //-------------------------------------------
 void ResetRanking(void)
 {
-	/*g_RankScore[0].nScore = 4000;
-	g_RankScore[1].nScore = 5000;
-	g_RankScore[2].nScore = 10000;
-	g_RankScore[3].nScore = 2000;
-	g_RankScore[4].nScore = 3000;*/
-
 	FILE * pFile;		//ファイルポインタ
 
 	//ファイルを開く
@@ -267,7 +266,7 @@ void SetRanking(void)
 {
 	int aPosTexU[5][MAX_RANKX];			//各桁の数字を格納
 
-	g_RankScore[5].nScore = GetScore();
+	g_RankScore[5].nScore = GetScore();		//score.cppのスコアを獲得
 
 	//バブルソート
 	for (int nCnt = 0; nCnt < 5; nCnt++)
@@ -338,22 +337,4 @@ void SetRanking(void)
 
 	//頂点バッファをアンロックする
 	g_pVtxBuffRank[1]->Unlock();
-
-	//FILE * pFile;			//ファイルポインタを宣言
-
-	////ランキング結果をファイルに書き出す
-	//pFile = fopen("Ranking.txt", "w");
-	//if (pFile != NULL)
-	//{
-	//	for (int nCount = 0; nCount < MAX_RANKY; nCount++)
-	//	{
-	//		//ファイルにランキングを書き出す
-	//		fprintf(pFile, "%d\n", &g_RankScore[nCount].nScore);
-	//	}
-	//	fclose(pFile);
-	//}
-	//else
-	//{//ファイルが開けなかった場合
-	//	printf("ファイルが開けませんでした。");
-	//}
 }
