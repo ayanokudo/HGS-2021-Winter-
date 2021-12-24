@@ -227,7 +227,7 @@ void CTitle::SetTex(void)
 	m_apScene2D[TITLE_PLAYER]->SetPosition(D3DXVECTOR3(1100.0f, 550.0f, 0), D3DXVECTOR3(223.0f, 302.0f, 0.0f));
 
 	// プレスエンター
-	m_apScene2D[TITLE_ENTER]->SetPosition(D3DXVECTOR3(SCREEN_WIDTH / 2, 660.0f, 0), D3DXVECTOR3(490.0f, 90.0f, 0.0f));
+	m_apScene2D[TITLE_ENTER]->SetPosition(D3DXVECTOR3(SCREEN_WIDTH / 2, 500.0f, 0), D3DXVECTOR3(490.0f, 90.0f, 0.0f));
 }
 
 //-------------------------------------------------------------------------------
