@@ -60,7 +60,7 @@ HRESULT CTitle::Load(void)
 	pDevice = CManager::GetRenderer()->GetDevice();
 
 	//テクスチャの読み込み
-	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/Title.png", &m_apTexture[TITLE_BG]);
+	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/title000.png", &m_apTexture[TITLE_BG]);
 	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/us_00.png", &m_apTexture[TITLE_PLAYER]);
 	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/press_enter.png", &m_apTexture[TITLE_ENTER]);
 
