@@ -39,7 +39,6 @@ bool CPlayer::m_bCollison = false;
 #define MIXPOS          (0.0)           // 左端限界値
 #define MAXPOS          (1000.0f)       // 右はし限界値
 
-
 //-------------------------------------------------------------------------------
 // コンストラク
 //-------------------------------------------------------------------------------
@@ -145,7 +144,7 @@ HRESULT CPlayer::Init(D3DXVECTOR3 pos, D3DXVECTOR3 scale)
 	m_TexNow = D3DXVECTOR2(0, 0);
 	m_nCntx = 0;
 	m_nCnty = 0;
-	m_Tex = D3DXVECTOR2(4, 2);
+	m_Tex = D3DXVECTOR2(2, 1);// 分割数
 	m_nCntEnemy = 0;
 	m_nCnt = 0;
 

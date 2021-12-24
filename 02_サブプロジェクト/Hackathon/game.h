@@ -26,6 +26,7 @@ class CPlayerAI;					// プレイヤーAI
 class CEffect;						// エフェクト
 class CPause;						// ポーズ
 class CItem;						// アイテム
+class CRoadSines;
 
 //-------------------------------------------------------------------------------
 // マクロ定義
@@ -96,6 +97,7 @@ private:
 	static CEffect *m_effect;										// エフェクトのポインタ
 	static CPause *m_pPause;										// ポーズのポインタ	
 	static CItem *m_pItem;											// アイテムのポインタ								
+    static CRoadSines *m_RoadSines;
 
 	static RESULTMODE m_resultmode;									// リザルトモード				
 	static int m_MapData[MAX_LINE][MAX_COLUMN];						// マップの二次配列

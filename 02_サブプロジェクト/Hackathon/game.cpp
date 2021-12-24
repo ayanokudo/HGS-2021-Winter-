@@ -51,6 +51,7 @@ CPlayer *CGame::m_pPlayer = NULL;
 CEffect *CGame::m_effect = NULL;
 CPause *CGame::m_pPause = NULL;
 CItem *CGame::m_pItem = NULL;
+ CRoadSines *CGame::m_RoadSines=nullptr;
 int CGame::m_MapData[MAX_LINE][MAX_COLUMN] = {};
 CGame::RESULTMODE CGame::m_resultmode = RESULTMODE_NONE;
 bool CGame::m_IsGame = false;
@@ -72,6 +73,7 @@ CGame::CGame()
 //-------------------------------------------------------------------------------
 CGame::~CGame()
 {
+
 }
 
 //-------------------------------------------------------------------------------
@@ -91,7 +93,7 @@ HRESULT CGame::Init(D3DXVECTOR3 pos, D3DXVECTOR3 scale)
 	m_effect = CEffect::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(50.0f, 50.0f, 0.0f));
 
 	// プレイヤーの生成
-	m_pPlayer = CPlayer::Create(D3DXVECTOR3(SCREEN_WIDTH / 2 , SCREEN_HEIGHT / 2, 0), D3DXVECTOR3(MAX_PLAYER_X, MAX_PLAYER_Y, 0));
+	m_pPlayer = CPlayer::Create(D3DXVECTOR3(SCREEN_WIDTH / 2 , SCREEN_HEIGHT / 1.5, 0), D3DXVECTOR3(MAX_PLAYER_X, MAX_PLAYER_Y, 0));
 
 	// プレイヤーAIの生成
 	//m_pPlayerAI = CPlayerAI::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0), D3DXVECTOR3(198.0f*0.5, 277.0f*0.5, 0));
@@ -166,7 +168,7 @@ void CGame::Update(void)
 
     // ランダムなタイミングで敵を生成
     //CRoadSines::Create();
-    if (std::rand()%200==0)
+    if (std::rand()%150==0)
     {
         CRoadSines::Create();
     }

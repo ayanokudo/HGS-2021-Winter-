@@ -102,6 +102,9 @@ private:
 	bool m_bUse;												// 使用しているか
 
     int m_score;                                                // 追加されるスコア
+
+                                                                // アニメーションの設定
+
 };
 
 #endif

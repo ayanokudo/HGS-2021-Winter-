@@ -154,7 +154,6 @@ void UninitRanking(void)
 {
 	//サウンドの停止
 	//StopSound();
-
 	for (int nCount = 0; nCount < MAX_TEX; nCount++)
 	{
 		//テクスチャの破棄

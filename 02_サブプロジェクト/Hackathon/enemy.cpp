@@ -32,7 +32,7 @@ HRESULT CEnemy::Load(void)
 	pDevice = CManager::GetRenderer()->GetDevice();
 
 	//テクスチャの読み込み
-	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/enemy01.png", &m_apTexture);
+	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/enemy.png", &m_apTexture);
 
 	return S_OK;
 }
@@ -126,13 +126,16 @@ HRESULT CEnemy::Init(D3DXVECTOR3 pos, D3DXVECTOR3 scale, D3DXVECTOR3 move)
 
 	m_bCoolTime = false;
 
-
+    
 	// 代入
 	m_scale = scale;
 	m_move = move;
 
 	// 2Dポリゴンの初期化処理を呼び出す
 	CScene2D::Init(pos, scale);
+
+    // アニメーションの設定
+    SetTex({0,0}, {2,1});
 
 	// オブジェクトタイプを敵に設定する
 	SetObjType(CScene::OBJTYPE_ENEMY);

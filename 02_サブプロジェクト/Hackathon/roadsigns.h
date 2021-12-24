@@ -29,7 +29,7 @@ public:
         TYPE_MAX
     }TYPE;
 
-    CRoadSines();
+    CRoadSines(PRIORITY nPriority = PRIORITY_BULLET_UI);
     ~CRoadSines();
 
     static CRoadSines* Create(D3DXVECTOR3 pos = {600,300,0.0f}, TYPE type= TYPE_000);

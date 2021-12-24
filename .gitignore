@@ -34,3 +34,4 @@
 .suo
 *.suo
 *.db
+/02_サブプロジェクト/Hackathon/*.opendb
