@@ -132,12 +132,13 @@ HRESULT CEnemy::Init(D3DXVECTOR3 pos, D3DXVECTOR3 scale, D3DXVECTOR3 move, int t
 	m_State = ENEMY_NORMAL;
 	m_nCntStatus = 0;
     m_Type = type;
+    m_score = 1* (type+1);// スコアをタイプと同じにする
+
 	// 分裂カウント
 	m_nDivisionCnt = 0;
 
 	m_bCoolTime = false;
 
-    
 	// 代入
 	m_scale = scale;
 	m_move = move;
@@ -247,26 +248,27 @@ void CEnemy::Update(void)
 					PosPlayer = pScene->GetPos();
 					SizePlayer = pScene->GetScale();
 
-					// アイテム情報
-					CPlayer *pPlayer;
-					pPlayer = (CPlayer*)pScene;
-
 						// プレイヤーとアイテムの当たり判定
 						if ((Pos.y - m_scale.y)>(PosPlayer.y + SizePlayer.y))
 						{
-                            // プレイヤーの位置を取得
-                            // プレイヤーの位置より下になったときにスコア加算
-                            if (m_score != 0)
-                            {
-                               CGame::GetScore()->AddScore(m_score);
-                                m_score = 0;
-                            }
-							m_nDivisionCnt += 1;
+                            //// プレイヤーの位置を取得
+                            //// プレイヤーの位置より下になったときにスコア加算
+                            //if (m_score != 0)
+                            //{
+                            //   CGame::GetScore()->AddScore(m_score);
+                            //    m_score = 0;
+                            //}
 						}
 				}
 			}
 		}
 	}
+
+    //if (Pos.y>600||m_score != 0)
+    //{
+    //    CGame::GetScore()->AddScore(m_score);
+    //    m_score = 0;
+    //}
 
 	//// 敵を分裂させる
 	//Division(m_State);
@@ -284,6 +286,7 @@ void CEnemy::Update(void)
     //　位置が一定値より大きかったら
     if (Pos.y > 720)
     {
+        CGame::GetScore()->AddScore(m_score);
         //// バウンドしたかどうか
         //m_bBound = true;
 

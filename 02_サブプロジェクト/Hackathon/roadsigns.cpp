@@ -104,13 +104,13 @@ HRESULT CRoadSines::Init(D3DXVECTOR3 pos, TYPE type)
     switch (m_roadpos)
     {
     case 0:
-        roadpos.x = (SCREEN_WIDTH / 2.0f) - 150;
+        roadpos.x = 415;
         break;
     case 1:
         roadpos.x = SCREEN_WIDTH / 2;
         break;
     case 2:
-        roadpos.x = (SCREEN_WIDTH / 2.0f) + 150;
+        roadpos.x = 865;
         break;
     default:
         break;
