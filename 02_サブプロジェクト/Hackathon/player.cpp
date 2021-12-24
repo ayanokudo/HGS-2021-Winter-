@@ -207,6 +207,7 @@ void CPlayer::Update(void)
             m_linepos -= 1;
 			m_move.x -= PLAYER_MOVE;
             // SE:カチッ
+			pSound->Play(CSound::SOUND_LABEL_SE_MOVE);
 		}
 
 		if (plnputKeyboard->GetTrigger(DIK_D))
@@ -214,6 +215,7 @@ void CPlayer::Update(void)
             m_linepos += 1;
 			m_move.x += PLAYER_MOVE;
             // SE:カチッ
+			pSound->Play(CSound::SOUND_LABEL_SE_MOVE);
 		}
 	}
 
