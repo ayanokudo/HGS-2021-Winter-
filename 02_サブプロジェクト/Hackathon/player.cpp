@@ -202,15 +202,16 @@ void CPlayer::Update(void)
 	{// フェード中は動かない
 
 		// プレイヤーの移動処理
-		if (plnputKeyboard->GetTrigger(DIK_A))
+		if (plnputKeyboard->GetTrigger(DIK_A) || plnputKeyboard->GetTrigger(DIK_LEFT))
 		{// Aキーを押した
             m_linepos -= 1;
 			m_move.x -= PLAYER_MOVE;
             // SE:カチッ
 			pSound->Play(CSound::SOUND_LABEL_SE_MOVE);
 		}
+		
 
-		if (plnputKeyboard->GetTrigger(DIK_D))
+		if (plnputKeyboard->GetTrigger(DIK_D) || plnputKeyboard->GetTrigger(DIK_RIGHT))
 		{// Dキーを押した
             m_linepos += 1;
 			m_move.x += PLAYER_MOVE;
