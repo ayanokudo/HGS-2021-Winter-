@@ -16,6 +16,8 @@ LPDIRECT3DTEXTURE9 g_pTextureRank[MAX_TEX] = {};			//テクスチャへのポインタ
 LPDIRECT3DVERTEXBUFFER9 g_pVtxBuffRank[MAX_TEX] = {};		//頂点バッファへのポインタ
 D3DXVECTOR3 g_posRank[MAX_RANKY][MAX_RANKX];				//スコアの位置
 Rank g_RankScore[MAX_RANKY];								//ランキングスコア情報
+D3DXVECTOR3 g_posRanking[MAX_RANKY];						//順位の位置
+float fTexV[MAX_RANKY];												//順位のV座標テクスチャ
 int g_nRankCounter;											//点滅用カウンター
 
 //**************************************************************
@@ -47,6 +49,11 @@ void InitRanking(void)
 	D3DXCreateTextureFromFile(pDevice,
 		"data/TEXTURE/number000.png",
 		&g_pTextureRank[1]);
+	
+	//テクスチャの読み込み(順位)
+		D3DXCreateTextureFromFile(pDevice,
+			"data/TEXTURE/rank.png",
+			&g_pTextureRank[2]);
 
 	//頂点バッファの生成(背景)
 	pDevice->CreateVertexBuffer(sizeof(VERTEX_2D) * 4 ,
@@ -57,11 +64,19 @@ void InitRanking(void)
 		NULL);
 
 	//頂点バッファの生成(スコア)
-		pDevice->CreateVertexBuffer(sizeof(VERTEX_2D) * 4 * MAX_RANKX * 5,
+		pDevice->CreateVertexBuffer(sizeof(VERTEX_2D) * 4 * MAX_RANKX * MAX_RANKY,
 			D3DUSAGE_WRITEONLY,
 			FVF_VERTEX_2D,
 			D3DPOOL_MANAGED,
 			&g_pVtxBuffRank[1],
+			NULL);
+
+		//頂点バッファの生成(順位)
+		pDevice->CreateVertexBuffer(sizeof(VERTEX_2D) * 4 * MAX_RANKY,
+			D3DUSAGE_WRITEONLY,
+			FVF_VERTEX_2D,
+			D3DPOOL_MANAGED,
+			&g_pVtxBuffRank[2],
 			NULL);
 
 	//背景
@@ -145,6 +160,49 @@ void InitRanking(void)
 
 	//頂点バッファをアンロックする
 	g_pVtxBuffRank[1]->Unlock();
+
+	//順位
+	//頂点バッファをロックし、頂点情報へのポインタを取得
+	g_pVtxBuffRank[2]->Lock(0, 0, (void**)&pVtx, 0);
+
+	for (int nCntY = 0; nCntY < MAX_RANKY; nCntY++)
+	{
+			//順位の設置場所
+		g_posRanking[nCntY]= D3DXVECTOR3(100.0f, 170.0f + (110.0f * nCntY), 0.0f);
+		fTexV[nCntY] = 0.2f + (0.2f * nCntY);
+	}
+
+	for (int nCntY = 0; nCntY < MAX_RANKY; nCntY++)
+	{
+			//頂点座標の設定
+			pVtx[0].pos = D3DXVECTOR3(g_posRanking[nCntY].x - (100.0f / 2.0f), g_posRanking[nCntY].y - (RANKING_HEIGHT / 2.0f), 0.0f);
+			pVtx[1].pos = D3DXVECTOR3(g_posRanking[nCntY].x + (100.0f / 2.0f), g_posRanking[nCntY].y - (RANKING_HEIGHT / 2.0f), 0.0f);
+			pVtx[2].pos = D3DXVECTOR3(g_posRanking[nCntY].x - (100.0f / 2.0f), g_posRanking[nCntY].y + (RANKING_HEIGHT / 2.0f), 0.0f);
+			pVtx[3].pos = D3DXVECTOR3(g_posRanking[nCntY].x + (100.0f / 2.0f), g_posRanking[nCntY].y + (RANKING_HEIGHT / 2.0f), 0.0f);
+
+			//rhwの設定
+			pVtx[0].rhw = 1.0f;
+			pVtx[1].rhw = 1.0f;
+			pVtx[2].rhw = 1.0f;
+			pVtx[3].rhw = 1.0f;
+
+			//頂点カラーの設定
+			pVtx[0].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+			pVtx[1].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+			pVtx[2].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+			pVtx[3].col = D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f);
+
+			//テクスチャ座標の設定
+			pVtx[0].tex = D3DXVECTOR2(0.0f, (1.0f / MAX_RANKY));
+			pVtx[1].tex = D3DXVECTOR2(1.0f, (1.0f / MAX_RANKY));
+			pVtx[2].tex = D3DXVECTOR2(0.0f, (1.0f / MAX_RANKY));
+			pVtx[3].tex = D3DXVECTOR2(1.0f, (1.0f / MAX_RANKY));
+
+			pVtx += 4;		//頂点データを４つ分進める
+	}
+
+	//頂点バッファをアンロックする
+	g_pVtxBuffRank[2]->Unlock();
 
 	SetRanking();
 
@@ -237,6 +295,23 @@ void UpdateRanking(void)
 	//頂点バッファをアンロックする
 	g_pVtxBuffRank[1]->Unlock();
 
+	//頂点バッファをロックし、頂点情報へのポインタを取得
+	g_pVtxBuffRank[2]->Lock(0, 0, (void**)&pVtx, 0);
+	
+	//テクスチャ座標の更新
+	for (int nCntY = 0; nCntY < MAX_RANKY; nCntY++)
+	{
+		pVtx[0].tex = D3DXVECTOR2(0.1f, (1.0f / MAX_RANKY) * nCntY);
+		pVtx[1].tex = D3DXVECTOR2(1.0f, (1.0f / MAX_RANKY) * nCntY);
+		pVtx[2].tex = D3DXVECTOR2(0.0f, (1.0f / MAX_RANKY) * (nCntY + 1.0f));
+		pVtx[3].tex = D3DXVECTOR2(1.0f, (1.0f / MAX_RANKY) * (nCntY + 1.0f));
+	
+		pVtx += 4;
+	}
+	
+	//頂点バッファをアンロックする
+	g_pVtxBuffRank[2]->Unlock();
+
     // キーボードの入力状態を取得
     CInput_Keyboard *plnputKeyboard = CManager::GetInputKeyboard();
 
@@ -261,6 +336,7 @@ void DrawRanking(void)
 	//デバイスの取得
 	pDevice = CRenderer::GetDevice();
 
+	//背景
 	//頂点バッファをデータストリームに設定
 	pDevice->SetStreamSource(0, g_pVtxBuffRank[0], 0, sizeof(VERTEX_2D));
 
@@ -273,6 +349,7 @@ void DrawRanking(void)
 	//ポリゴンの描画
 	pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2);
 
+	//スコア
 	//頂点バッファをデータストリームに設定
 	pDevice->SetStreamSource(0, g_pVtxBuffRank[1], 0, sizeof(VERTEX_2D));
 
@@ -280,8 +357,7 @@ void DrawRanking(void)
 	pDevice->SetFVF(FVF_VERTEX_2D);
 	int nCount = 0;
 
-	//スコア
-	for (int nCntY = 0; nCntY < 5; nCntY++)
+	for (int nCntY = 0; nCntY < MAX_RANKY; nCntY++)
 	{
 		for (int nCntX = 0; nCntX < MAX_RANKX; nCntX++, nCount++)
 		{
@@ -291,6 +367,22 @@ void DrawRanking(void)
 			//ポリゴンの描画
 			pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, nCount * 4, 2);
 		}
+	}
+
+	//順位
+	//頂点バッファをデータストリームに設定
+	pDevice->SetStreamSource(0, g_pVtxBuffRank[2], 0, sizeof(VERTEX_2D));
+
+	//頂点フォーマットの設定
+	pDevice->SetFVF(FVF_VERTEX_2D);
+
+	for (int nCntY = 0; nCntY < MAX_RANKY; nCntY++)
+	{
+		//テクスチャ設定(背景)
+		pDevice->SetTexture(0, g_pTextureRank[2]);
+
+		//ポリゴンの描画
+		pDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, nCntY * 4, 2);
 	}
 }
 

@@ -20,7 +20,7 @@
 #define MAX_RANKX				(8)			//X‚Ì”
 #define RANKING_WIDTH			(50)		//‡ˆÊ‚Ì•
 #define RANKING_HEIGHT			(100)		//‡ˆÊ‚Ì‚‚³
-#define MAX_TEX					(2)			//‰æ‘œ‚Ì–‡”
+#define MAX_TEX					(3)			//‰æ‘œ‚Ì–‡”
 
 //ƒ‰ƒ“ƒLƒ“ƒO\‘¢‘Ì
 typedef struct
