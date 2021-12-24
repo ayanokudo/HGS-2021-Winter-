@@ -61,6 +61,7 @@ private:
     typedef enum
     {
         STATE_NORMAL=0, // í èÌ
+        STATE_MOVE,   // 
         STATE_DAMAGE,   // É_ÉÅÅ[ÉW
         STATE_DEATH     // éÄñS
     }STATE;

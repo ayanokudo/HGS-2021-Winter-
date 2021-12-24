@@ -36,8 +36,8 @@ bool CPlayer::m_bCollison = false;
 #define PLAYER_MOVE		(150.0f)		// 移動量
 #define MAX_GRAVITY		(2.5f)			// 重力
 #define MAX_JUMP		(-35.0f)		// ジャンプ
-#define MIXPOS          (0.0)           // 左端限界値
-#define MAXPOS          (1000.0f)       // 右はし限界値
+#define MIXPOS          ((SCREEN_WIDTH/2.0f)-PLAYER_MOVE)           // 左端限界値
+#define MAXPOS          ((SCREEN_WIDTH/2.0f)+PLAYER_MOVE)       // 右はし限界値
 
 //-------------------------------------------------------------------------------
 // コンストラク
@@ -228,13 +228,13 @@ void CPlayer::Update(void)
 	Pos += m_move;
 
 	// プレイヤーと画面の当たり判定
-	if (Pos.x < 0.0)
+	if (Pos.x < MIXPOS)
 	{
-		Pos.x = 0.0;
+		Pos.x = MIXPOS;
 	}
-	if (Pos.x > 1280.0f)
+	if (Pos.x > MAXPOS)
 	{
-		Pos.x = 1280.0f;
+		Pos.x = MAXPOS;
 	}
 
 	// 位置の設定

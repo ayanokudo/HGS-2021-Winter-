@@ -59,9 +59,9 @@ bool CGame::m_IsGame = false;
 //-------------------------------------------------------------------------------
 // マクロ定義
 //-------------------------------------------------------------------------------
-#define ENEMYCREATE_000 (200) // アマビエ出現率
-#define ENEMYCREATE_001 (300) // 鹿出現率
-#define ENEMYCREATE_002 (400) // ユニコーン出現率
+#define ENEMYCREATE_000 (500) // アマビエ出現率
+#define ENEMYCREATE_001 (700) // 鹿出現率
+#define ENEMYCREATE_002 (1000) // ユニコーン出現率
 
 //-------------------------------------------------------------------------------
 // コンストラク
@@ -105,7 +105,7 @@ HRESULT CGame::Init(D3DXVECTOR3 pos, D3DXVECTOR3 scale)
 	m_pScore = CScore::Create(D3DXVECTOR3(SCREEN_WIDTH - (NUMBER_WIDTH * 4), NUMBER_HEIGHT / 2, 0.0f), D3DXVECTOR3(0.0f, 0.0f, 0));
 
 	// ライフの生成
-	m_pLife = CLife::Create(D3DXVECTOR3(SCREEN_WIDTH*0.3 - (LIFE_WIDTH * 4), LIFE_HEIGHT / 2, 0.0f), D3DXVECTOR3(50.0f, 50.0f, 0));
+	//m_pLife = CLife::Create(D3DXVECTOR3(SCREEN_WIDTH*0.3 - (LIFE_WIDTH * 4), LIFE_HEIGHT / 2, 0.0f), D3DXVECTOR3(50.0f, 50.0f, 0));
 
 	// 弾UIの生成
 	//m_pBullet_UI = CBullet_UI::Create(D3DXVECTOR3(SCREEN_WIDTH*0.3 - (BULLET_UI_WIDTH * 4), BULLET_UI_HEIGHT / 2, 0.0f), D3DXVECTOR3(BULLET_UI_WIDTH, BULLET_UI_HEIGHT, 0));
