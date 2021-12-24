@@ -230,6 +230,14 @@ void CPlayer::Update(void)
 	Pos += m_move;
 
 	// ƒvƒŒƒCƒ„[‚Æ‰æ–Ê‚Ì“–‚½‚è”»’è
+	//if (Pos.x < MIXPOS)
+	//{
+	//	Pos.x = MIXPOS;
+	//}
+	//if (Pos.x > MAXPOS)
+	//{
+	//	Pos.x = MAXPOS;
+	//}
 	if (Pos.x < MIXPOS)
 	{
 		Pos.x = MIXPOS;
