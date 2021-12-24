@@ -15,7 +15,7 @@
 char* CRoadSines::Texture_Name[TYPE_MAX] =
 {
     { "data/TEXTURE/UI/sine_000.png" },
-    { "data/TEXTURE/UI/sine_001.png" },
+    { "data/TEXTURE/UI/Sign_001.png" },
     { "data/TEXTURE/UI/Sign_002.png" },
 };
 LPDIRECT3DTEXTURE9 CRoadSines::m_pTexture[TYPE_MAX] = {};
@@ -150,7 +150,7 @@ void CRoadSines::Update(void)
      // カウンタ0以下になったとき
      if (nCntSine == 0)
      {  // 敵出現
-         CEnemy::Create(m_enemyPos[m_roadpos], ENEMY_SIZE, m_enemyspeed[m_Type]);
+         CEnemy::Create(m_enemyPos[m_roadpos], ENEMY_SIZE, m_enemyspeed[m_Type], m_Type);
          Uninit();// 標識の終了
      }
 }
@@ -172,7 +172,7 @@ void CRoadSines::Unload(void)
     for (int nCnt= 0; nCnt < TYPE_MAX; nCnt++)
     {
         //テクスチャの開放
-        if (m_pTexture != NULL)
+        if (m_pTexture[nCnt] != NULL)
         {
             m_pTexture[nCnt]->Release();
             m_pTexture[nCnt] = NULL;

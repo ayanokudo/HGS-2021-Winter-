@@ -110,7 +110,7 @@ void CSpawnEnemy::SpawnEnemy(void)
 		if (m_nCnt  %m_EnemyStatus[m_nCntEnemy].interval == 0)
 		{
 			// “G‚ğ¶¬
-			CEnemy::Create(m_EnemyStatus[m_nCntEnemy].PosEnemy, m_EnemyStatus[m_nCntEnemy].SizeEnemy, m_EnemyStatus[m_nCntEnemy].MoveEnemy);
+			//CEnemy::Create(m_EnemyStatus[m_nCntEnemy].PosEnemy, m_EnemyStatus[m_nCntEnemy].SizeEnemy, m_EnemyStatus[m_nCntEnemy].MoveEnemy);
 
 			// “G‚ğ¶¬
 //			CEnemy::Create(m_EnemyStatus[m_nCntEnemy].PosEnemy, m_EnemyStatus[m_nCntEnemy].SizeEnemy, m_EnemyStatus[m_nCntEnemy].MoveEnemy, m_EnemyStatus[m_nCntEnemy].nEnemyType);

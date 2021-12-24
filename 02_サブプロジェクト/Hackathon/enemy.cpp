@@ -65,11 +65,10 @@ void CEnemy::Unload(void)
 //-------------------------------------------------------------------------------
 // 敵の生成
 //-------------------------------------------------------------------------------
-CEnemy *CEnemy::Create(D3DXVECTOR3 pos, D3DXVECTOR3 scale, D3DXVECTOR3 move)
+CEnemy *CEnemy::Create(D3DXVECTOR3 pos, D3DXVECTOR3 scale, D3DXVECTOR3 move, int type)
 {
 	// 変数宣言
 	CEnemy *pEnemy = NULL;
-
 	if (pEnemy == NULL)
 	{// 中にデータが何もなかったら
 		// 動的確保
@@ -78,10 +77,10 @@ CEnemy *CEnemy::Create(D3DXVECTOR3 pos, D3DXVECTOR3 scale, D3DXVECTOR3 move)
 		if (pEnemy != NULL)
 		{// 中にデータがあったら
 			// 初期化処理を呼び出す
-			pEnemy->Init(pos, scale, move);
+			pEnemy->Init(pos, scale, move, type);
 
 			// 敵のテクスチャを割り当てる
-			pEnemy->BindTexture(m_pTexture[0]);
+			pEnemy->BindTexture(m_pTexture[type]);
 		}
 	}
 	// 値を返す
@@ -124,7 +123,7 @@ CEnemy::~CEnemy()
 //-------------------------------------------------------------------------------
 // 初期化処理
 //-------------------------------------------------------------------------------
-HRESULT CEnemy::Init(D3DXVECTOR3 pos, D3DXVECTOR3 scale, D3DXVECTOR3 move)
+HRESULT CEnemy::Init(D3DXVECTOR3 pos, D3DXVECTOR3 scale, D3DXVECTOR3 move, int type)
 {
 	// 初期化
 	m_Colr = D3DXCOLOR(0.0f, 0.0f, 0.0f, 0.0f);
@@ -132,7 +131,7 @@ HRESULT CEnemy::Init(D3DXVECTOR3 pos, D3DXVECTOR3 scale, D3DXVECTOR3 move)
 	m_nCntColr = 0;
 	m_State = ENEMY_NORMAL;
 	m_nCntStatus = 0;
-
+    m_Type = type;
 	// 分裂カウント
 	m_nDivisionCnt = 0;
 
@@ -390,24 +389,25 @@ D3DXVECTOR3 CEnemy::MoveSearch(D3DXVECTOR3 move)
 //-------------------------------------------------------------------------------
 bool CEnemy::Division(ENEMY state)
 {
-	// 位置の取得
-	D3DXVECTOR3 Pos;
-	Pos = GetPosition();
+	//// 位置の取得
+	//D3DXVECTOR3 Pos;
+	//Pos = GetPosition();
 
-	if (m_State == ENEMY_NORMAL)
-	{// 通常状態
+	//if (m_State == ENEMY_NORMAL)
+	//{// 通常状態
 		m_bCoolTime = false;
-		
-	}
-	else if (m_State == ENEMY_DAMAGE)
-	{// 敵とオブジェクトが当たった
-		if (m_nDivisionCnt > 0)
-		{// 0より大きかったら
-			// 敵の生成
-			Create(D3DXVECTOR3(Pos.x - 50, Pos.y, Pos.z), m_scale *0.6f, D3DXVECTOR3(m_move.x, -10.0f, 0.0f));
-			// 敵の生成
-			Create(D3DXVECTOR3(Pos.x + 50, Pos.y, Pos.z), m_scale *0.6f, D3DXVECTOR3(m_move.x, 5.0f, 0.0f));
-		}
+	//	
+	//}
+	//else if (m_State == ENEMY_DAMAGE)
+	//{// 敵とオブジェクトが当たった
+	//	if (m_nDivisionCnt > 0)
+	//	{// 0より大きかったら
+	//		// 敵の生成
+	//		Create(D3DXVECTOR3(Pos.x - 50, Pos.y, Pos.z), m_scale *0.6f, D3DXVECTOR3(m_move.x, -10.0f, 0.0f));
+	//		// 敵の生成
+	//		Create(D3DXVECTOR3(Pos.x + 50, Pos.y, Pos.z), m_scale *0.6f, D3DXVECTOR3(m_move.x, 5.0f, 0.0f));
+	//	}
+        return false;
 	}
 
 
@@ -452,5 +452,5 @@ bool CEnemy::Division(ENEMY state)
 	//		}
 	//	}
 	//}
-	return false;
-}
+//	return false;
+//}

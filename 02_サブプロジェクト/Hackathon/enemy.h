@@ -30,10 +30,9 @@ public:
 	// 敵の種類
 	typedef enum
 	{
-		ENEMYTYPE_NONE = 0,
-		ENEMYTYPE_GHOST,		// お化け
-		ENEMYTYPE_GHOST_INVERSION,		// 反転
-		ENEMYTYPE_BEAR,		// 熊
+		ENEMYTYPE_000 = 0,
+		ENEMYTYPE_001,
+		ENEMYTYPE_002,
 		ENEMYTYPE_MAX
 	}ENEMYTYPE;
 
@@ -54,9 +53,9 @@ public:
 	static void Unload(void);
 
 	// 生成
-	static CEnemy *Create(D3DXVECTOR3 pos, D3DXVECTOR3 scale, D3DXVECTOR3 move);
+	static CEnemy *Create(D3DXVECTOR3 pos, D3DXVECTOR3 scale, D3DXVECTOR3 move, int type);
 
-	HRESULT Init(D3DXVECTOR3 pos, D3DXVECTOR3 scale, D3DXVECTOR3 move);
+	HRESULT Init(D3DXVECTOR3 pos, D3DXVECTOR3 scale, D3DXVECTOR3 move, int type);
 	void Uninit(void);
 	void Update(void);
 	void Draw(void);
@@ -97,7 +96,7 @@ private:
 	int m_nDivisionCnt;											// 分裂カウントできる回数
 
 
-	ENEMYTYPE m_Type;											// 敵のタイプ	
+	int m_Type;											// 敵のタイプ	
 	int m_nCntStatus;
 	bool m_bCollision;											// 当たったかどうか
 	bool m_bCoolTime;

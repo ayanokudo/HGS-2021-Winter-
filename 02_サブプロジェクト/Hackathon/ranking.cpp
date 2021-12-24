@@ -8,6 +8,8 @@
 #include "renderer.h"           // •`‰æ‚ÌŠÇ—ƒNƒ‰ƒX
 #include "manager.h"            // ƒ‚[ƒh‚ÌŠÇ—ƒNƒ‰ƒX
 #include "Input_keyboard.h"		// ƒL[ƒ{[ƒhƒNƒ‰ƒX
+#include "fade.h"
+#include "manager.h"
 
 //ƒOƒ[ƒoƒ‹éŒ¾
 LPDIRECT3DTEXTURE9 g_pTextureRank[MAX_TEX] = {};			//ƒeƒNƒXƒ`ƒƒ‚Ö‚Ìƒ|ƒCƒ“ƒ^
@@ -15,6 +17,11 @@ LPDIRECT3DVERTEXBUFFER9 g_pVtxBuffRank[MAX_TEX] = {};		//’¸“_ƒoƒbƒtƒ@‚Ö‚Ìƒ|ƒCƒ“ƒ
 D3DXVECTOR3 g_posRank[MAX_RANKY][MAX_RANKX];				//ƒXƒRƒA‚ÌˆÊ’u
 Rank g_RankScore[MAX_RANKY];								//ƒ‰ƒ“ƒLƒ“ƒOƒXƒRƒAî•ñ
 int g_nRankCounter;											//“_–Å—pƒJƒEƒ“ƒ^[
+
+//**************************************************************
+// ƒ}ƒNƒ’è‹`
+//**************************************************************
+#define RANKING_TEXT "data/TEXT/Ranking.txt"
 
 int g_nGameScore = 0;
 //-------------------------------------------
@@ -239,7 +246,7 @@ void UpdateRanking(void)
 
 		//PlaySound(SOUND_LABEL_SE000);		//SE‚ğÄ¶
 		//ƒ‚[ƒhİ’è
-        CManager::SetMode(CManager::MODE_TITLE);				//ƒ^ƒCƒgƒ‹‰æ–Ê‚ÉˆÚs
+        CManager::GetFade()->CFade::SetFade(CManager::MODE_TITLE);				//ƒ^ƒCƒgƒ‹‰æ–Ê‚ÉˆÚs
 	}
 }
 
@@ -295,7 +302,7 @@ void ResetRanking(void)
 	FILE * pFile;		//ƒtƒ@ƒCƒ‹ƒ|ƒCƒ“ƒ^
 
 	//ƒtƒ@ƒCƒ‹‚ğŠJ‚­
-	pFile = fopen("Ranking.txt", "r");
+	pFile = fopen(RANKING_TEXT, "r");
 	if(pFile != NULL)
 	{//ƒtƒ@ƒCƒ‹‚ªŠJ‚¯‚½ê‡
 		//ƒtƒ@ƒCƒ‹‚©‚çƒ‰ƒ“ƒLƒ“ƒO‚ğ“Ç‚İ‚Ş
@@ -337,7 +344,7 @@ void SetRanking()
 	FILE * pFile;			//ƒtƒ@ƒCƒ‹ƒ|ƒCƒ“ƒ^‚ğéŒ¾
 
 	//ƒ‰ƒ“ƒLƒ“ƒOŒ‹‰Ê‚ğƒtƒ@ƒCƒ‹‚É‘‚«o‚·
-	pFile = fopen("Ranking.txt", "w");
+	pFile = fopen(RANKING_TEXT, "w");
 	if (pFile != NULL)
 	{
 		for (int nCount = 0; nCount < MAX_RANKY; nCount++)
