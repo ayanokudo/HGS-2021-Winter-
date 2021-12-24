@@ -163,12 +163,12 @@ void CBg::Update(void)
 					// プレイヤーの移動量が0より大きい時
 					if (PlayerAIMove.x > 0.0f)
 					{// 背景を右にスクロールさせる
-						m_fPosTexU[nCnt] += m_fSpeed[nCnt];
+						m_fPosTexV[nCnt] += m_fSpeed[nCnt];
 					}
 					// プレイヤーの移動量が0より小さい時
 					else if (PlayerAIMove.x < 0.0f)
 					{// 背景を左にスクロールさせる
-						m_fPosTexU[nCnt] -= m_fSpeed[nCnt];
+						m_fPosTexV[nCnt] -= m_fSpeed[nCnt];
 					}
 
 

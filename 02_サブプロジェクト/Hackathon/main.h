@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <random>// 乱数
 #include "d3dx9.h"
 #include "xaudio2.h"	//サウンド再生に必要
 

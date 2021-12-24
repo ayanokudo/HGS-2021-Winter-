@@ -33,6 +33,7 @@
 #include "item.h"				// アイテム
 #include "SpawnEnemy.h"
 #include "ranking.h"
+#include "roadsigns.h"
 
 //-------------------------------------------------------------------------------
 // 静的メンバ変数定義
@@ -90,7 +91,7 @@ HRESULT CGame::Init(D3DXVECTOR3 pos, D3DXVECTOR3 scale)
 	m_effect = CEffect::Create(D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(50.0f, 50.0f, 0.0f));
 
 	// プレイヤーの生成
-	m_pPlayer = CPlayer::Create(D3DXVECTOR3(SCREEN_WIDTH / 2 - INTERVAL, SCREEN_HEIGHT / 2, 0), D3DXVECTOR3(MAX_PLAYER_X, MAX_PLAYER_Y, 0));
+	m_pPlayer = CPlayer::Create(D3DXVECTOR3(SCREEN_WIDTH / 2 , SCREEN_HEIGHT / 2, 0), D3DXVECTOR3(MAX_PLAYER_X, MAX_PLAYER_Y, 0));
 
 	// プレイヤーAIの生成
 	//m_pPlayerAI = CPlayerAI::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0), D3DXVECTOR3(198.0f*0.5, 277.0f*0.5, 0));
@@ -109,17 +110,6 @@ HRESULT CGame::Init(D3DXVECTOR3 pos, D3DXVECTOR3 scale)
 
 	// ポーズの生成
 	m_pPause = CPause::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0), D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0));
-
-	// 敵の情報
-	//CSpawnEnemy::LoadSpawnEnemyData();
-    CEnemy::Create({ 600,0.0,0.0 }, { 50,50,0.0 }, { 0.0,5.0,0.0 });
-	// マップ読み込み
-	FILE *pFile;
-	int nCountX = 0;
-	int nCountY = 0;
-	char aLine[256];
-
-	int MapData[MAX_LINE][MAX_COLUMN] = {};
 
 	// サウンド関係
 	CSound *pSound;
@@ -175,8 +165,11 @@ void CGame::Update(void)
 	//}
 
     // ランダムなタイミングで敵を生成
-
-
+    //CRoadSines::Create();
+    if (std::rand()%200==0)
+    {
+        CRoadSines::Create();
+    }
 
     // エンターを押したとき
     if (pFade->GetFade() == CFade::FADE_NONE && plnputKeyboard->GetTrigger(DIK_RETURN) == true)
@@ -223,6 +216,7 @@ void CGame::LoadAll(void)
 	CEffect::Load();
 	CPause::Load();
 	CItem::Load();
+    CRoadSines::Load();
 }
 
 //-------------------------------------------------------------------------------
@@ -243,4 +237,5 @@ void CGame::UnloadAll(void)
 	CEffect::Unload();
 	CPause::Unload();
 	CItem::Unload();
+    CRoadSines::Unload();
 }

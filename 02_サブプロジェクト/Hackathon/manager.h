@@ -6,6 +6,7 @@
 //--------------------------------------------------------------------------------
 #ifndef _MANAGER_H_
 #define _MANAGER_H_
+#include"main.h"
 
 //-------------------------------------------------------------------------------
 // 前方宣言
@@ -34,13 +35,13 @@ public:
 		MODE_GAME,			// ゲーム
 		MODE_RESULT,		// リザルト
         MODE_RANKING,        // ランキング
-		MODE_MAX,
+		MODE_MAX
 	}MODE;
 
 	CManager();
 	 ~CManager();
 
-	 HRESULT Init(HWND hWnd, BOOL bWindow, HINSTANCE hInstance);						// 初期化処理
+     HRESULT Init(HWND hWnd, BOOL bWindow, HINSTANCE hInstance);						// 初期化処理
 	 void Uninit(void);																	// 終了処理
 	 void Update(void);																	// 更新処理
 	 void Draw(void);																	// 描画処理

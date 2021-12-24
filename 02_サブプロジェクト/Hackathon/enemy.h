@@ -100,6 +100,8 @@ private:
 	bool m_bCollision;											// 当たったかどうか
 	bool m_bCoolTime;
 	bool m_bUse;												// 使用しているか
+
+    int m_score;                                                // 追加されるスコア
 };
 
 #endif

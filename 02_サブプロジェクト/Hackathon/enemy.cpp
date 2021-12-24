@@ -10,6 +10,7 @@
 #include "scene2D.h"		// 2Dポリゴン
 #include "game.h"			// ゲーム
 #include "player.h"
+#include "score.h"          // スコア
 
 //-------------------------------------------------------------------------------
 // マクロ定義
@@ -98,6 +99,7 @@ CEnemy::CEnemy(PRIORITY nPriority) :CScene2D(nPriority)
 	m_bCoolTime = false;
 
 	m_bUse = true;
+    m_score = 1;
 }
 
 //-------------------------------------------------------------------------------
@@ -159,56 +161,47 @@ void CEnemy::Update(void)
 	D3DXVECTOR3 Pos;
 	Pos = GetPosition();
 
-	//// 追尾処理
+	// 追尾処理
 	D3DXVECTOR3 move = MoveSearch(m_move);
 
-	//　位置が一定値より大きかったら
-	if (Pos.y > 620.0f)
-	{
-		// バウンドしたかどうか
-		m_bBound = true;
+	//else if (m_nCnt < 300 && m_bBound == true)
+	//{//　値が一定値より低い場合
+	//	// バウンド後の加算
+	//	m_nCnt++;
+	//}
 
-		// 落下するとき付与する値
-		m_nCntFall += 15;
+	////バウンド状態がfalseの場合
+	//if (m_bBound == false)
+	//{
+	//	//値を加算
+	//	m_move.y = 2.0f;
+	//}
+	//else
+	//{// バウンド状態がtrueの場合
+	// // 値を減算
+	//	m_move.y = -1.0f;
+	//}
 
-	}
-	else if (m_nCnt < 300 && m_bBound == true)
-	{//　値が一定値より低い場合
-		// バウンド後の加算
-		m_nCnt++;
-	}
+	////　値が一定値より高い場合(一定値は落下カウントの値分引く)
+	//if (m_nCnt >= 300 - m_nCntFall)
+	//{
+	// // バウンドしたかどうか
+	//	m_bBound = false;
 
-	//バウンド状態がfalseの場合
-	if (m_bBound == false)
-	{
-		//値を加算
-		m_move.y = 2.0f;
-	}
-	else
-	{// バウンド状態がtrueの場合
-	 // 値を減算
-		m_move.y = -1.0f;
-	}
-
-	//　値が一定値より高い場合(一定値は落下カウントの値分引く)
-	if (m_nCnt >= 300 - m_nCntFall)
-	{
-	 // バウンドしたかどうか
-		m_bBound = false;
-
-	 // バウンド後の加算
-		m_nCnt = 0;
-	}
+	// // バウンド後の加算
+	//	m_nCnt = 0;
+	//}
 	
-	// 落下カウントの値が一定値より大きくなった場合
-	if (m_nCntFall > 200)
-	{
-		// 値を0にする
-		m_nCntFall = 0;
-	}
+	//// 落下カウントの値が一定値より大きくなった場合
+	//if (m_nCntFall > 200)
+	//{
+	//	// 値を0にする
+	//	m_nCntFall = 0;
+	//}
 
-	// 移動量加算
+	//// 移動量加算
 	Pos += m_move;
+
 
 	// 敵の動きを加算
 	//Pos.y += MoveSnake();
@@ -247,11 +240,21 @@ void CEnemy::Update(void)
 
 					if (m_State == ENEMY_NORMAL)
 					{
+                        //// プレイヤーとアイテムの当たり判定
+                        //if (Collision(Pos, m_scale, PosPlayer, SizePlayer) == true)
+                        //{
+                        //}
+                        
 						// プレイヤーとアイテムの当たり判定
-						if (Collision(Pos, m_scale, PosPlayer, SizePlayer) == true)
+						if ((Pos.y - m_scale.y)>(PosPlayer.y + SizePlayer.y))
 						{
-							m_State = ENEMY_DAMAGE;
-
+                            // プレイヤーの位置を取得
+                            // プレイヤーの位置より下になったときにスコア加算
+                            if (m_score != 0)
+                            {
+                               CGame::GetScore()->AddScore(m_score);
+                                m_score = 0;
+                            }
 							m_nDivisionCnt += 1;
 						}
 					}
@@ -260,18 +263,30 @@ void CEnemy::Update(void)
 		}
 	}
 
-	// 敵を分裂させる
-	Division(m_State);
+	//// 敵を分裂させる
+	//Division(m_State);
 
-	if (Division(m_State) == true)
-	{
-		Uninit();
-		
-		return;
-	}
+	//if (Division(m_State) == true)
+	//{
+	//	Uninit();
+	//	
+	//	return;
+	//}
 
 	// 敵の位置情報を2Dポリゴンに渡す
 	CScene2D::SetPosition(Pos, m_scale);
+
+    //　位置が一定値より大きかったら
+    if (Pos.y > 720)
+    {
+        //// バウンドしたかどうか
+        //m_bBound = true;
+
+        //// 落下するとき付与する値
+        //m_nCntFall += 15;
+        Uninit();
+
+    }
 }
 
 //-------------------------------------------------------------------------------

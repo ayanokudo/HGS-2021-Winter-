@@ -48,8 +48,6 @@ public:
 	void SetJump(bool bJunp) { m_bJump = bJunp; }					// プレイヤーのジャンプを設定
 	void SetItem(bool bItem) { m_bItem = bItem; }					// プレイヤーがアイテムを入手したか
 
-	
-
 private:
 	// プレイヤーの位置
 	typedef enum
