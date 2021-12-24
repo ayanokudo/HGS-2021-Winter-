@@ -1,0 +1,67 @@
+﻿  tutorial.cpp
+c:\users\student\desktop\hackathon\main.h(19): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  sound.cpp
+c:\users\student\desktop\hackathon\main.h(19): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  scroll.cpp
+c:\users\student\desktop\hackathon\main.h(19): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  score.cpp
+c:\users\student\desktop\hackathon\main.h(19): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  scene2D.cpp
+c:\users\student\desktop\hackathon\main.h(19): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  scene.cpp
+c:\users\student\desktop\hackathon\main.h(19): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  roadsigns.cpp
+c:\users\student\desktop\hackathon\main.h(19): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  result.cpp
+c:\users\student\desktop\hackathon\main.h(19): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  renderer.cpp
+c:\users\student\desktop\hackathon\main.h(19): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  ranking.cpp
+c:\users\student\desktop\hackathon\main.h(19): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  polygon.cpp
+c:\users\student\desktop\hackathon\main.h(19): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  player.cpp
+c:\users\student\desktop\hackathon\main.h(19): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  particle.cpp
+c:\users\student\desktop\hackathon\main.h(19): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  number.cpp
+c:\users\student\desktop\hackathon\main.h(19): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  manager.cpp
+c:\users\student\desktop\hackathon\main.h(19): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  main.cpp
+c:\users\student\desktop\hackathon\main.h(19): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  life.cpp
+c:\users\student\desktop\hackathon\main.h(19): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  item.cpp
+c:\users\student\desktop\hackathon\main.h(19): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  game.cpp
+c:\users\student\desktop\hackathon\main.h(19): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  fade.cpp
+c:\users\student\desktop\hackathon\main.h(19): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  コードを生成中...
+  コンパイル中...
+  explosion.cpp
+c:\users\student\desktop\hackathon\main.h(19): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  enemy.cpp
+c:\users\student\desktop\hackathon\main.h(19): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  effect.cpp
+c:\users\student\desktop\hackathon\main.h(19): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  bullet.cpp
+c:\users\student\desktop\hackathon\main.h(19): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  block.cpp
+c:\users\student\desktop\hackathon\main.h(19): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  bg.cpp
+c:\users\student\desktop\hackathon\main.h(19): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  Title.cpp
+c:\users\student\desktop\hackathon\main.h(19): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  SpawnEnemy.cpp
+c:\users\student\desktop\hackathon\main.h(19): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  Pause.cpp
+c:\users\student\desktop\hackathon\main.h(19): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  Input_Keyboard.cpp
+c:\users\student\desktop\hackathon\main.h(19): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  Input.cpp
+c:\users\student\desktop\hackathon\main.h(19): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  Bullet_UI.cpp
+c:\users\student\desktop\hackathon\main.h(19): fatal error C1083: include ファイルを開けません。'd3dx9.h':No such file or directory
+  コードを生成中...
