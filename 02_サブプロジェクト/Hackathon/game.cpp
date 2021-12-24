@@ -196,7 +196,7 @@ void CGame::Update(void)
 		m_resultmode = RESULTMODE_GAMECLEAR;
         // モードの設定
         GetGameScore(m_pScore->GetScore());// ランキングにスコアを送信
-        pFade->SetFade(CManager::MODE_RESULT);  // ランキングモードに変更
+        pFade->SetFade(CManager::MODE_RANKING);  // ランキングモードに変更
 
 	}
 

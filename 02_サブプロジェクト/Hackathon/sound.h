@@ -40,6 +40,7 @@ public:
 		SOUND_LABEL_SE_ON,				// ON
 		SOUND_LABEL_SE_DAMAGE,			// ダメージ
 		SOUND_LABEL_SE_JUMP,			// ジャンプ
+		SOUND_LABEL_SE_MOVE,			// 移動
 
 		SOUND_LABEL_MAX,
 	} SOUND_LABEL;
