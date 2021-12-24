@@ -14,9 +14,9 @@
 
 char* CRoadSines::Texture_Name[TYPE_MAX] =
 {
-    { "data/TEXTURE/UI/enemy02.png" },
-    { "data/TEXTURE/UI/enemy02.png" },
-    { "data/TEXTURE/UI/enemy02.png" },
+    { "data/TEXTURE/UI/sine_000.png" },
+    { "data/TEXTURE/UI/sine_001.png" },
+    { "data/TEXTURE/UI/Sign_002.png" },
 };
 LPDIRECT3DTEXTURE9 CRoadSines::m_pTexture[TYPE_MAX] = {};
 
@@ -33,6 +33,8 @@ LPDIRECT3DTEXTURE9 CRoadSines::m_pTexture[TYPE_MAX] = {};
 CRoadSines::CRoadSines(PRIORITY nPriority) :CScene2D(nPriority)
 {
     nCntSine = ROADCOUNTOR;
+    m_roadpos = 0;
+    m_Type = TYPE_000;
 }
 
 //======================================================================================
@@ -80,8 +82,29 @@ CRoadSines * CRoadSines::Create(D3DXVECTOR3 pos, TYPE type)
 //-------------------------------------------------------------------------------
 HRESULT CRoadSines::Init(D3DXVECTOR3 pos, TYPE type)
 {
+
+    D3DXVECTOR3 roadpos = {0.0,200.0f,0.0f};
+
+    m_roadpos = std::rand() % 3;// ランダムで出現位置を決める
+
+    switch (m_roadpos)
+    {
+    case 0:
+        roadpos.x = SCREEN_WIDTH / 1.5;
+        break;
+    case 1:
+        roadpos.x = SCREEN_WIDTH / 2;
+        break;
+    case 2:
+        roadpos.x = SCREEN_WIDTH / 4;
+        break;
+    default:
+        break;
+    }
+
+    m_Type = type;
     // 2Dポリゴンの初期化処理を呼び出す
-    CScene2D::Init(pos, ROADSINES_SIZE);
+    CScene2D::Init(roadpos, ROADSINES_SIZE);
 
     // テクスチャの割り当て
     BindTexture(m_pTexture[type]);

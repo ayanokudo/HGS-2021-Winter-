@@ -45,7 +45,10 @@ private:
     static LPDIRECT3DTEXTURE9 m_pTexture[TYPE_MAX];						// 共有テクスチャのポインタ
     static char* Texture_Name[TYPE_MAX];        // テクスチャファイル名
     int nCntSine;// サインのカウンタ(0になると敵生成)
-
+    TYPE m_Type;// タイプ
+    int m_roadpos;// 出現場所
+    //static D3DXVECTOR3 m_enemyPos[TYPE_MAX];// 敵の出現位置
+    //static D3DXVECTOR3 m_enemyspeed[TYPE_MAX];// 敵の速度
 };
 
 #endif

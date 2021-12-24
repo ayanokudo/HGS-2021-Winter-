@@ -168,8 +168,9 @@ void CGame::Update(void)
 
     // ランダムなタイミングで敵を生成
     //CRoadSines::Create();
-    if (std::rand()%150==0)
+    if (std::rand() % 150 == 0)
     {
+        D3DXVECTOR3 pos = {};
         CRoadSines::Create();
     }
 

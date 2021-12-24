@@ -78,7 +78,9 @@ private:
 	// メンバ関数
 	bool Division(ENEMY state);
 
-	static LPDIRECT3DTEXTURE9 m_apTexture;						// テクスチャのポインタ
+    static LPDIRECT3DTEXTURE9 m_pTexture[ENEMY_MAX];						// 共有テクスチャのポインタ
+    static char* Texture_Name[ENEMY_MAX];                                   // テクスチャファイル名
+
 	D3DXVECTOR3 m_scale;										// サイズ
 	D3DXVECTOR3 m_move;											// 移動量
 	D3DXCOLOR m_Colr;											// カラー

@@ -20,7 +20,14 @@
 //-------------------------------------------------------------------------------
 // 静的メンバ変数宣言
 //-------------------------------------------------------------------------------
-LPDIRECT3DTEXTURE9 CEnemy::m_apTexture = {};
+char* CEnemy::Texture_Name[ENEMY_MAX] =
+{
+    { "data/TEXTURE/enemy.png" },
+    { "data/TEXTURE/enemy01.png" },
+    { "data/TEXTURE/enemy02.png" },
+};
+LPDIRECT3DTEXTURE9 CEnemy::m_pTexture[ENEMY_MAX] = {};
+
 
 //-------------------------------------------------------------------------------
 // テクスチャの読み込み
@@ -31,10 +38,12 @@ HRESULT CEnemy::Load(void)
 	LPDIRECT3DDEVICE9 pDevice;
 	pDevice = CManager::GetRenderer()->GetDevice();
 
-	//テクスチャの読み込み
-	D3DXCreateTextureFromFile(pDevice, "data/TEXTURE/enemy.png", &m_apTexture);
-
-	return S_OK;
+    //テクスチャの読み込み
+    for (int nCnt = 0; nCnt < ENEMY_MAX; nCnt++)
+    {
+        D3DXCreateTextureFromFile(pDevice, Texture_Name[nCnt], &m_pTexture[nCnt]);
+    }
+    return S_OK;
 }
 
 //-------------------------------------------------------------------------------
@@ -42,12 +51,15 @@ HRESULT CEnemy::Load(void)
 //-------------------------------------------------------------------------------
 void CEnemy::Unload(void)
 {
-	//テクスチャの開放
-	if (m_apTexture != NULL)
-	{
-		m_apTexture->Release();
-		m_apTexture = NULL;
-	}
+    //for (int nCnt = 0; nCnt < ENEMY_MAX; nCnt++)
+    //{
+    //    //テクスチャの開放
+    //    if (m_pTexture != NULL)
+    //    {
+    //        m_pTexture[nCnt]->Release();
+    //        m_pTexture[nCnt] = NULL;
+    //    }
+    //}
 }
 
 //-------------------------------------------------------------------------------
@@ -69,7 +81,7 @@ CEnemy *CEnemy::Create(D3DXVECTOR3 pos, D3DXVECTOR3 scale, D3DXVECTOR3 move)
 			pEnemy->Init(pos, scale, move);
 
 			// 敵のテクスチャを割り当てる
-			pEnemy->BindTexture(m_apTexture);
+			pEnemy->BindTexture(m_pTexture[0]);
 		}
 	}
 	// 値を返す

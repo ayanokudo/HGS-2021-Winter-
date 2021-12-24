@@ -1,4 +1,6 @@
-﻿  enemy.cpp
-c:\users\student\desktop\git\hgs-2021-winter-\02_サブプロジェクト\hackathon\enemy.cpp(347): warning C4101: 'pPlayerAI': ローカル変数は 1 度も使われていません。
+﻿  roadsigns.cpp
+c:\users\student\desktop\git\hgs-2021-winter-\02_サブプロジェクト\hackathon\roadsigns.cpp(93): warning C4305: '=': 'double' から 'float' へ切り詰めます。
+  game.cpp
+  コードを生成中...
   Hackathon.vcxproj -> C:\Users\student\Desktop\Git\HGS-2021-Winter-\02_サブプロジェクト\Hackathon\Debug\Hackathon.exe
   Hackathon.vcxproj -> C:\Users\student\Desktop\Git\HGS-2021-Winter-\02_サブプロジェクト\Hackathon\Debug\Hackathon.pdb (Full PDB)
