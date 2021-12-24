@@ -20,12 +20,25 @@ char* CRoadSines::Texture_Name[TYPE_MAX] =
 };
 LPDIRECT3DTEXTURE9 CRoadSines::m_pTexture[TYPE_MAX] = {};
 
+D3DXVECTOR3 CRoadSines::m_enemyPos[3]=
+{
+    { SCREEN_WIDTH / 1.5f,0.0f,0.0f},
+    { SCREEN_WIDTH / 2.0f,0.0f,0.0f},
+    { SCREEN_WIDTH / 4.0f,0.0f,0.0f}
+};// 敵の出現位置
+D3DXVECTOR3 CRoadSines::m_enemyspeed[TYPE_MAX]=
+{
+    { 0.0,3.0,0.0 },// アマビエ速度
+    { 0.0,5.0,0.0 },
+    { 0.0,7.0,0.0 }
+};// 敵の速度
+
 //**************************************************************************************
 // マクロ定義
 //**************************************************************************************
 #define ROADCOUNTOR (30)
 #define ROADSINES_SIZE {200.0f,200.0f,0.0f}// UIの大きさ
-#define ENEMY_SIZE     {128,256,0.0f}
+#define ENEMY_SIZE     {100,200,0.0f}
 
 //======================================================================================
 // コンストラクタ
@@ -42,6 +55,7 @@ CRoadSines::CRoadSines(PRIORITY nPriority) :CScene2D(nPriority)
 //======================================================================================
 CRoadSines::~CRoadSines()
 {
+
 }
 
 //======================================================================================
@@ -103,6 +117,7 @@ HRESULT CRoadSines::Init(D3DXVECTOR3 pos, TYPE type)
     }
 
     m_Type = type;
+
     // 2Dポリゴンの初期化処理を呼び出す
     CScene2D::Init(roadpos, ROADSINES_SIZE);
 
@@ -135,7 +150,7 @@ void CRoadSines::Update(void)
      // カウンタ0以下になったとき
      if (nCntSine == 0)
      {  // 敵出現
-         CEnemy::Create({ 600,0.0,0.0 }, ENEMY_SIZE, { 0.0,5.0,0.0 });
+         CEnemy::Create(m_enemyPos[m_roadpos], ENEMY_SIZE, m_enemyspeed[m_Type]);
          Uninit();// 標識の終了
      }
 }

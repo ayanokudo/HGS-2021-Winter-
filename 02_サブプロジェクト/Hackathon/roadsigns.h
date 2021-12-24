@@ -47,8 +47,8 @@ private:
     int nCntSine;// サインのカウンタ(0になると敵生成)
     TYPE m_Type;// タイプ
     int m_roadpos;// 出現場所
-    //static D3DXVECTOR3 m_enemyPos[TYPE_MAX];// 敵の出現位置
-    //static D3DXVECTOR3 m_enemyspeed[TYPE_MAX];// 敵の速度
+    static D3DXVECTOR3 m_enemyPos[3];// 敵の出現位置
+    static D3DXVECTOR3 m_enemyspeed[TYPE_MAX];// 敵の速度
 };
 
 #endif
