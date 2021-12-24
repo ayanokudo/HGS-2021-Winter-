@@ -56,6 +56,9 @@ int CGame::m_MapData[MAX_LINE][MAX_COLUMN] = {};
 CGame::RESULTMODE CGame::m_resultmode = RESULTMODE_NONE;
 bool CGame::m_IsGame = false;
 
+int CGame::m_label=1;// ゲームのレベル
+int CGame::m_nCnt=0;
+
 //-------------------------------------------------------------------------------
 // マクロ定義
 //-------------------------------------------------------------------------------
@@ -63,12 +66,15 @@ bool CGame::m_IsGame = false;
 #define ENEMYCREATE_001 (435) // 鹿出現率
 #define ENEMYCREATE_002 (505) // ユニコーン出現率
 
+#define LEVELUP (10*60)
+
 //-------------------------------------------------------------------------------
 // コンストラク
 //-------------------------------------------------------------------------------
 CGame::CGame()
 {
-	
+    m_nCnt = 0;
+    m_label = 1;
 }
 
 //-------------------------------------------------------------------------------
@@ -88,6 +94,9 @@ HRESULT CGame::Init(D3DXVECTOR3 pos, D3DXVECTOR3 scale)
     m_IsGame = true;
 	// 全てのテクスチャ読み込み
 	CGame::LoadAll();
+
+    m_nCnt = 0;
+    m_label = 1;
 
 	// 背景の生成
 	m_pBg = CBg::Create(D3DXVECTOR3(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 0), D3DXVECTOR3(SCREEN_WIDTH, SCREEN_HEIGHT, 0));
@@ -150,6 +159,8 @@ void CGame::Uninit(void)
 //-------------------------------------------------------------------------------
 void CGame::Update(void)
 {
+    m_nCnt++;
+
 	// キーボード関係
 	CInput_Keyboard *plnputKeyboard;
 	plnputKeyboard = CManager::GetInputKeyboard();
@@ -168,18 +179,23 @@ void CGame::Update(void)
 	//	// タイトルに移動する
 	//	pFade->SetFade(CManager::MODE_RESULT);
 	//}
-
+        // 10秒ごとに出現率
+        if (m_nCnt>  LEVELUP )
+        {
+            m_nCnt = 0;
+            m_label++;
+        }
     // ランダムなタイミングで敵を生成
     //CRoadSines::Create();
-    if (std::rand() % ENEMYCREATE_000 == 0)
+    if (std::rand() % (ENEMYCREATE_000/ m_label) == 0)
     {
         CRoadSines::Create({0.0f,0.0f,0.0f}, CRoadSines::TYPE_000);
     }
-    if (std::rand() % ENEMYCREATE_001 == 0)
+    if (std::rand() % (ENEMYCREATE_001 / m_label) == 0)
     {
         CRoadSines::Create({ 0.0f,0.0f,0.0f }, CRoadSines::TYPE_001);
     }
-    if (std::rand() % ENEMYCREATE_002 == 0)
+    if (std::rand() % (ENEMYCREATE_002 / m_label) == 0)
     {
         CRoadSines::Create({ 0.0f,0.0f,0.0f }, CRoadSines::TYPE_002);
     }
