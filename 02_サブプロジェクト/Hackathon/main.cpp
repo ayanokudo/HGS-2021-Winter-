@@ -14,7 +14,7 @@
 // マクロ定義
 //--------------------------------------------------------------------------------
 #define CLASS_NAME		"AppClass"			// ウインドウのクラス名
-#define WINDOW_NAME		"Plush doll"	// ウインドウのキャプション名
+#define WINDOW_NAME		"{いらっしゃいませ！　ポテトはいかがですか？)"	// ウインドウのキャプション名
 
 //--------------------------------------------------------------------------------
 // プロトタイプ宣言
@@ -36,7 +36,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	WNDCLASSEX wcex =
 	{
 		sizeof(WNDCLASSEX),
-		CS_CLASSDC,
+        CS_HREDRAW | CS_VREDRAW,
 		WndProc,
 		0,
 		0,

@@ -9,6 +9,7 @@
 #include "scene2D.h"			// 2Dポリゴン
 #include "scene.h"				// ポリゴン
 #include "Input_Keyboard.h"		// キーボード
+#include "inputcontroller.h"    // コントローラー
 #include "sound.h"				// サウンド
 #include "game.h"				// ゲームシーン
 #include "Title.h"				// タイトル
@@ -38,6 +39,7 @@ CResult *CManager::m_pResult = NULL;
 
 CRenderer *CManager::m_pRenderer = NULL;
 CInput_Keyboard *CManager::m_pInputKeyboard = NULL;
+CInputController *CManager::m_InputController = nullptr;
 CSound *CManager::m_pSound = NULL;
 CFade *CManager::m_pFade = NULL;
 
@@ -88,6 +90,17 @@ HRESULT CManager::Init(HWND hWnd, BOOL bWindow, HINSTANCE hInstance)
 			m_pInputKeyboard->Init(hInstance, hWnd);
 		}
 	}
+    // コントローラー生成
+    if (!m_InputController)
+    {
+        // メモリの確保
+        m_InputController = new CInputController;
+
+        if (m_InputController)
+        {
+            m_InputController->Init(hInstance, hWnd);
+        }
+    }
 
 	// サウンドの生成
 	if (m_pSound == NULL)
@@ -131,6 +144,14 @@ void CManager::Uninit(void)
 		delete m_pInputKeyboard;
 		m_pInputKeyboard = NULL;
 	}
+
+    // コントローラの終了処理
+    if (m_InputController)
+    {
+        m_InputController->Uninit();
+        delete m_InputController;
+        m_InputController = nullptr;
+    }
 
 	// レンダリングの破棄
 	if (m_pRenderer != NULL)

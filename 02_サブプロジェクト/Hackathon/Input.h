@@ -30,6 +30,7 @@ public:
 protected:
 	LPDIRECTINPUTDEVICE8 m_pDevice;								// デバイスのポインタ
 	static LPDIRECTINPUT8 m_pInput;								// DirectInputオブジェクトへのポインタ
+    static LPDIRECTINPUTDEVICE8 m_pConDevice;     // コントローラーデバイス
 };
 
 #endif
