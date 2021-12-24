@@ -230,14 +230,14 @@ void CPlayer::Update(void)
 	Pos += m_move;
 
 	// プレイヤーと画面の当たり判定
-	if (Pos.x < MIXPOS)
-	{
-		Pos.x = MIXPOS;
-	}
-	if (Pos.x > MAXPOS)
-	{
-		Pos.x = MAXPOS;
-	}
+	//if (Pos.x < MIXPOS)
+	//{
+	//	Pos.x = MIXPOS;
+	//}
+	//if (Pos.x > MAXPOS)
+	//{
+	//	Pos.x = MAXPOS;
+	//}
 
 	// 位置の設定
 	SetPosition(Pos, m_size);

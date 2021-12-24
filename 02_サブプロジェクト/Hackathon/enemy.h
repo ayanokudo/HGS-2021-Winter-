@@ -76,6 +76,7 @@ public:
 private:
 	// メンバ関数
 	bool Division(ENEMY state);
+	void Animation(void);
 
     static LPDIRECT3DTEXTURE9 m_pTexture[ENEMY_MAX];						// 共有テクスチャのポインタ
     static char* Texture_Name[ENEMY_MAX];                                   // テクスチャファイル名
@@ -105,7 +106,11 @@ private:
     int m_score;                                                // 追加されるスコア
 
                                                                 // アニメーションの設定
-
+		// アニメーション関係
+	D3DXVECTOR2 m_TexNow;		// テクスチャ今いる場所
+	D3DXVECTOR2 m_Tex;			// 分割数
+	int m_nCntx;				// カウントX
+	int m_nCnty;				// カウントY     
 };
 
 #endif
