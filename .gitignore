@@ -35,3 +35,4 @@
 *.suo
 *.db
 /02_サブプロジェクト/Hackathon/*.opendb
+/02_サブプロジェクト/Hackathon/Debug
