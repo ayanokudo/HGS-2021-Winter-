@@ -26,6 +26,7 @@ CSound::SOUNDPARAM CSound::m_aParam[SOUND_LABEL_MAX] =
 	{ "data/SE/on.wav",0 },								// オン
 	{ "data/SE/damage.wav",0 },							// ダメージ
 	{ "data/SE/jump.wav",0 },							// ジャンプ
+	{ "data/SE/move.wav",0 },							// ジャンプ
 };
 
 //-------------------------------------------------------------------------------
