@@ -59,6 +59,10 @@ bool CGame::m_IsGame = false;
 //-------------------------------------------------------------------------------
 // マクロ定義
 //-------------------------------------------------------------------------------
+#define ENEMYCREATE_000 (200) // アマビエ出現率
+#define ENEMYCREATE_001 (300) // 鹿出現率
+#define ENEMYCREATE_002 (400) // ユニコーン出現率
+
 
 //-------------------------------------------------------------------------------
 // コンストラク
@@ -168,12 +172,18 @@ void CGame::Update(void)
 
     // ランダムなタイミングで敵を生成
     //CRoadSines::Create();
-    if (std::rand() % 150 == 0)
+    if (std::rand() % ENEMYCREATE_000 == 0)
     {
-        D3DXVECTOR3 pos = {};
-        CRoadSines::Create();
+        CRoadSines::Create({0.0f,0.0f,0.0f}, CRoadSines::TYPE_000);
     }
-
+    if (std::rand() % ENEMYCREATE_001 == 0)
+    {
+        CRoadSines::Create({ 0.0f,0.0f,0.0f }, CRoadSines::TYPE_001);
+    }
+    if (std::rand() % ENEMYCREATE_002 == 0)
+    {
+        CRoadSines::Create({ 0.0f,0.0f,0.0f }, CRoadSines::TYPE_002);
+    }
     // エンターを押したとき
     if (pFade->GetFade() == CFade::FADE_NONE && plnputKeyboard->GetTrigger(DIK_RETURN) == true)
     {
