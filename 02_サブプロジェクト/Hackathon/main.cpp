@@ -86,7 +86,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		if (pManager != NULL)
 		{// NULLじゃなかったら
 			 // 初期化処理
-			if (pManager->Init(hWnd, TRUE, hInstance))		// FALSEだとフルスクリーン。TRUEだと指定の大きさ
+			if (pManager->Init(hWnd, false, hInstance))		// FALSEだとフルスクリーン。TRUEだと指定の大きさ
 			{// 初期化処理を通ったら
 				return -1;						// trueだったら-1返す
 			}

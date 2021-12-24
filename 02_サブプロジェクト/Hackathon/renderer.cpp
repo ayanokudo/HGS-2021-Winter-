@@ -193,7 +193,7 @@ void CRenderer::Draw(void)
         }
 #ifdef _DEBUG
 		// FPS•\Ž¦
-		DrawFPS();
+		//DrawFPS();
 #endif
 		// Direct3D‚É‚æ‚é•`‰æ‚ÌI—¹
 		m_pD3DDevice->EndScene();
