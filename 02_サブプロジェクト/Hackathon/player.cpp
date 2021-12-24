@@ -33,11 +33,11 @@ bool CPlayer::m_bCollison = false;
 //-------------------------------------------------------------------------------
 // マクロ定義
 //-------------------------------------------------------------------------------
-#define PLAYER_MOVE		(150.0f)		// 移動量
+#define PLAYER_MOVE		(150)		// 移動量
 #define MAX_GRAVITY		(2.5f)			// 重力
 #define MAX_JUMP		(-35.0f)		// ジャンプ
-#define MIXPOS          ((SCREEN_WIDTH/2.0f)-PLAYER_MOVE)           // 左端限界値
-#define MAXPOS          ((SCREEN_WIDTH/2.0f)+PLAYER_MOVE)       // 右はし限界値
+#define MIXPOS          (415)           // 左端限界値
+#define MAXPOS          (865)       // 右はし限界値
 
 //-------------------------------------------------------------------------------
 // コンストラク

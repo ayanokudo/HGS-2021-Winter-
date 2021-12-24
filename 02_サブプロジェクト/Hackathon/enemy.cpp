@@ -16,6 +16,7 @@
 // マクロ定義
 //-------------------------------------------------------------------------------
 #define MAX_COUNTER		(50)		// カウンター
+#define MAX_SPEED		(5)			// アニメーションスピード
 
 //-------------------------------------------------------------------------------
 // 静的メンバ変数宣言
@@ -107,6 +108,11 @@ CEnemy::CEnemy(PRIORITY nPriority) :CScene2D(nPriority)
 	// 分裂カウント
 	m_nDivisionCnt = 0;
 
+	// アニメーション関係
+	m_TexNow = D3DXVECTOR2(0, 0);
+	m_nCntx = 0;
+	m_nCnty = 0;
+
 	m_bCoolTime = false;
 
 	m_bUse = true;
@@ -134,6 +140,13 @@ HRESULT CEnemy::Init(D3DXVECTOR3 pos, D3DXVECTOR3 scale, D3DXVECTOR3 move, int t
     m_Type = type;
 	// 分裂カウント
 	m_nDivisionCnt = 0;
+
+
+	// アニメーション関係
+	m_TexNow = D3DXVECTOR2(0, 0);
+	m_nCntx = 0;
+	m_nCnty = 0;
+	m_Tex = D3DXVECTOR2(2, 1);	// 分割数
 
 	m_bCoolTime = false;
 
@@ -236,7 +249,6 @@ void CEnemy::Update(void)
 				CScene::OBJTYPE objType;
 				objType = pScene->GetObjType();
 
-
 				// プレイヤーに当たったオブジェクトタイプがプレイヤーだったら
 				if (objType == CScene::OBJTYPE_PLAYER)
 				{
@@ -252,13 +264,6 @@ void CEnemy::Update(void)
 					CPlayer *pPlayer;
 					pPlayer = (CPlayer*)pScene;
 
-					if (m_State == ENEMY_NORMAL)
-					{
-                        //// プレイヤーとアイテムの当たり判定
-                        //if (Collision(Pos, m_scale, PosPlayer, SizePlayer) == true)
-                        //{
-                        //}
-                        
 						// プレイヤーとアイテムの当たり判定
 						if ((Pos.y - m_scale.y)>(PosPlayer.y + SizePlayer.y))
 						{
@@ -271,11 +276,16 @@ void CEnemy::Update(void)
                             }
 							m_nDivisionCnt += 1;
 						}
-					}
 				}
 			}
 		}
 	}
+
+	// アニメーション
+	Animation();
+
+	// アニメーションの設定
+	SetTex(m_TexNow, m_Tex);
 
 	//// 敵を分裂させる
 	//Division(m_State);
@@ -454,3 +464,42 @@ bool CEnemy::Division(ENEMY state)
 	//}
 //	return false;
 //}
+
+//-------------------------------------------------------------------------------
+// アニメーション
+//-------------------------------------------------------------------------------
+void CEnemy::Animation(void)
+{
+	// 変数宣言
+	D3DXVECTOR3 Pos;
+	Pos = GetPosition();
+
+	// AIの移動量取得
+	D3DXVECTOR3 PosPlayerAI;
+	CPlayerAI *pPlayerAI;
+	pPlayerAI = CGame::GetPlayerAI();
+
+	// プレイヤーを反転
+	if (Pos.x < PosPlayerAI.x)
+	{
+		// アニメーション関係
+		m_nCntx++;
+		m_nCnty = 1;
+
+		if ((m_nCntx % MAX_SPEED) == 0)
+		{// アニメーション速度の制御
+			m_TexNow = (D3DXVECTOR2((float)m_nCntx, (float)m_nCnty));
+		}
+	}
+	if (Pos.x > PosPlayerAI.x)
+	{
+		// アニメーション関係
+		m_nCntx++;
+		m_nCnty = 0;
+
+		if ((m_nCntx % MAX_SPEED) == 0)
+		{// アニメーション速度の制御
+			m_TexNow = (D3DXVECTOR2((float)m_nCntx, (float)m_nCnty));
+		}
+	}
+}
