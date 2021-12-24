@@ -236,7 +236,6 @@ void CEnemy::Update(void)
 				CScene::OBJTYPE objType;
 				objType = pScene->GetObjType();
 
-
 				// プレイヤーに当たったオブジェクトタイプがプレイヤーだったら
 				if (objType == CScene::OBJTYPE_PLAYER)
 				{
@@ -252,13 +251,6 @@ void CEnemy::Update(void)
 					CPlayer *pPlayer;
 					pPlayer = (CPlayer*)pScene;
 
-					if (m_State == ENEMY_NORMAL)
-					{
-                        //// プレイヤーとアイテムの当たり判定
-                        //if (Collision(Pos, m_scale, PosPlayer, SizePlayer) == true)
-                        //{
-                        //}
-                        
 						// プレイヤーとアイテムの当たり判定
 						if ((Pos.y - m_scale.y)>(PosPlayer.y + SizePlayer.y))
 						{
@@ -271,7 +263,6 @@ void CEnemy::Update(void)
                             }
 							m_nDivisionCnt += 1;
 						}
-					}
 				}
 			}
 		}

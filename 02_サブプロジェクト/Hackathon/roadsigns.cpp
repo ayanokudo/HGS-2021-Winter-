@@ -22,9 +22,9 @@ LPDIRECT3DTEXTURE9 CRoadSines::m_pTexture[TYPE_MAX] = {};
 
 D3DXVECTOR3 CRoadSines::m_enemyPos[3]=
 {
-    { SCREEN_WIDTH / 1.5f,0.0f,0.0f},
+    { 415,0.0f,0.0f},
     { SCREEN_WIDTH / 2.0f,0.0f,0.0f},
-    { SCREEN_WIDTH / 4.0f,0.0f,0.0f}
+    { 865,0.0f,0.0f}
 };// ìGÇÃèoåªà íu
 D3DXVECTOR3 CRoadSines::m_enemyspeed[TYPE_MAX]=
 {
@@ -104,13 +104,13 @@ HRESULT CRoadSines::Init(D3DXVECTOR3 pos, TYPE type)
     switch (m_roadpos)
     {
     case 0:
-        roadpos.x = SCREEN_WIDTH / 1.5;
+        roadpos.x = (SCREEN_WIDTH / 2.0f) - 150;
         break;
     case 1:
         roadpos.x = SCREEN_WIDTH / 2;
         break;
     case 2:
-        roadpos.x = SCREEN_WIDTH / 4;
+        roadpos.x = (SCREEN_WIDTH / 2.0f) + 150;
         break;
     default:
         break;
