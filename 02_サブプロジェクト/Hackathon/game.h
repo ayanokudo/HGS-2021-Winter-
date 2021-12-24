@@ -79,6 +79,8 @@ public:
 
     // Get関数
     static bool GetGame(void) { return m_IsGame; }// ゲームプレイ状態フラグ
+    static int GetLevel(void) {
+        return m_label ; }
     // Set関数
     static void SetIsGame(bool IsGame) { m_IsGame = IsGame;}// ゲームプレイ状態フラグ
 
@@ -103,6 +105,10 @@ private:
 	static int m_MapData[MAX_LINE][MAX_COLUMN];						// マップの二次配列
 
     static bool m_IsGame;// ゲームプレイ状態フラグ
+
+    static int m_label;// ゲームのレベル
+    static int m_nCnt;
+
 };
 
 #endif
