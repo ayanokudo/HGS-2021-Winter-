@@ -62,6 +62,7 @@ CPlayer::CPlayer(PRIORITY nPriority):CScene2D(nPriority)
 	m_nCntEnemy = 0;
 	m_nCnt = 0;
 	m_bCollison = false;
+    m_linepos = 1;
 }
 
 //-------------------------------------------------------------------------------
@@ -203,14 +204,14 @@ void CPlayer::Update(void)
 		// プレイヤーの移動処理
 		if (plnputKeyboard->GetTrigger(DIK_A))
 		{// Aキーを押した
-
+            m_linepos -= 1;
 			m_move.x -= PLAYER_MOVE;
             // SE:カチッ
 		}
 
 		if (plnputKeyboard->GetTrigger(DIK_D))
 		{// Dキーを押した
-
+            m_linepos += 1;
 			m_move.x += PLAYER_MOVE;
             // SE:カチッ
 		}

@@ -101,7 +101,7 @@ private:
 	static bool m_bCollison;
 	static int m_nCntEnemy;
 	int m_nCnt;
-
+    int m_linepos;
 };
 
 #endif
