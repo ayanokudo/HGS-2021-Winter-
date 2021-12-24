@@ -255,47 +255,6 @@ void UpdateRanking(void)
 	VERTEX_2D *pVtx;
 
 	//頂点バッファをロックし、頂点情報へのポインタを取得
-	g_pVtxBuffRank[1]->Lock(0, 0, (void**)&pVtx, 0);
-
-	for (int nCntScore = 0; nCntScore < MAX_RANKY; nCntScore++)
-	{
-		if (g_RankScore[nCntScore].nScore == g_nGameScore)
-		{//自分のスコアがランクインしたら
-			//点滅
-			g_nRankCounter--;
-			for (int nCntX = 0; nCntX < MAX_RANKX; nCntX++)
-			{
-				if (0 == g_nRankCounter % 30)
-				{
-					//頂点カラーの設定
-					pVtx[0].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f);
-					pVtx[1].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f);
-					pVtx[2].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f);
-					pVtx[3].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 1.0f);
-				}
-
-				if (10 == g_nRankCounter % 30)
-				{
-					//頂点カラーの設定
-					pVtx[0].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.0f);
-					pVtx[1].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.0f);
-					pVtx[2].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.0f);
-					pVtx[3].col = D3DXCOLOR(1.0f, 0.0f, 0.0f, 0.0f);
-				}
-
-				if (g_nRankCounter == 0)
-				{//カウンターが0になったら60に戻す
-					g_nRankCounter = 60;
-				}
-				pVtx += 4;		//頂点情報を4つ進める
-			}
-		}
-	}
-
-	//頂点バッファをアンロックする
-	g_pVtxBuffRank[1]->Unlock();
-
-	//頂点バッファをロックし、頂点情報へのポインタを取得
 	g_pVtxBuffRank[2]->Lock(0, 0, (void**)&pVtx, 0);
 	
 	//テクスチャ座標の更新
