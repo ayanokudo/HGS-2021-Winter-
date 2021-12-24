@@ -13,6 +13,7 @@
 //-------------------------------------------------------------------------------
 class CRenderer;														// レンダリング
 class CInput_Keyboard;													// キーボード
+class CInputController;                                                 // コントローラー
 class CSound;															// サウンド
 class CGame;															// ゲームシーン
 class CTitle;															// タイトル
@@ -53,6 +54,7 @@ public:
 	 // デバイスの取得
 	 static CRenderer *GetRenderer(void) { return m_pRenderer; }						// レンダラー
 	 static CInput_Keyboard *GetInputKeyboard(void) { return m_pInputKeyboard; }		// キーボード
+     static CInputController* GetInputController(void) { return (CInputController*)m_InputController; }
 	 static CSound *GetSound(void) { return m_pSound; }									// サウンド
 	 static CFade *GetFade(void) { return m_pFade; }									// フェード
 
@@ -71,6 +73,7 @@ private:
 
 	static CRenderer *m_pRenderer;										// レンダリングのポインタ
 	static CInput_Keyboard *m_pInputKeyboard;							// キーボードのポインタ
+    static CInputController    *m_InputController;                      // コントローラーのポインタ
 	static CSound *m_pSound;											// サウンドのポインタ
 	static CFade *m_pFade;												// フェードのポインタ
 

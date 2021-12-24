@@ -8,6 +8,7 @@
 #include "manager.h"			// マネージャー
 #include "renderer.h"			// レンダラ
 #include "Input_Keyboard.h"		// キー
+#include "inputcontroller.h"
 #include "fade.h"				// フェード
 #include "sound.h"				// サウンド
 #include "ranking.h"            // ランキング
@@ -109,6 +110,8 @@ CTitle *CTitle::Create(D3DXVECTOR3 pos, D3DXVECTOR3 scale)
 //-------------------------------------------------------------------------------
 HRESULT CTitle::Init(D3DXVECTOR3 pos, D3DXVECTOR3 scale)
 {
+    CInputController *pInputController = CManager::GetInputController();
+
 	// メンバ変数の初期化
 	m_fAdd = 0.0f;
 	m_bPressEnter = false;
@@ -174,6 +177,7 @@ void CTitle::Update(void)
 	// キーボード関係
 	CInput_Keyboard *plnputKeyboard;
 	plnputKeyboard = CManager::GetInputKeyboard();
+    CInputController *pInputController = CManager::GetInputController();
 
 	// モード関係
 	CManager::MODE pManager;
@@ -187,11 +191,10 @@ void CTitle::Update(void)
 	Blinking();
 
 	// エンターを押したとき
-	if (pFade->GetFade() == CFade::FADE_NONE && plnputKeyboard->GetTrigger(DIK_RETURN) == true)
+	if (pFade->GetFade() == CFade::FADE_NONE && plnputKeyboard->GetTrigger(DIK_RETURN) || pInputController->GetConTrigger(CInputController::BUTTON_10))
 	{
 		// エンターキーが押された
 		m_bPressEnter = true;
-
 		// モードの設定
 		pFade->SetFade(CManager::MODE_TUTORIAL);
 	}
